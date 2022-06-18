@@ -4,8 +4,28 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/ACM Hackathon/AAHAR-ENDUSER/app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
+        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/drawable-v24/circle.xml" value="0.26153846153846155" />
+        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/drawable-v24/ic_add.xml" value="0.26153846153846155" />
+        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/drawable-v24/ic_arrow_right.xml" value="0.26153846153846155" />
+        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/drawable-v24/ic_calendar.xml" value="0.26153846153846155" />
+        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/drawable-v24/ic_hidden_eye.xml" value="0.26153846153846155" />
+        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26153846153846155" />
+        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/drawable-v24/ic_lock.xml" value="0.26153846153846155" />
+        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/drawable-v24/ic_mess.xml" value="0.26153846153846155" />
+        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/drawable-v24/ic_person.xml" value="0.26153846153846155" />
+        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/drawable-v24/ic_view_eye.xml" value="0.26153846153846155" />
         <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/layout/activity_login.xml" value="0.1598731884057971" />
+        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/layout/activity_mess_info.xml" value="0.15081521739130435" />
         <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/layout/activity_sign_up.xml" value="0.1598731884057971" />
+        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/layout/app_bar_main.xml" value="0.12132725430597771" />
+        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/layout/content_main.xml" value="0.12132725430597771" />
+        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/layout/fragment_explore.xml" value="0.16666666666666666" />
+        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/layout/fragment_home.xml" value="0.12132725430597771" />
+        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/layout/fragment_notification.xml" value="0.12132725430597771" />
+        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/layout/mess_list.xml" value="0.1" />
+        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/layout/nav_header_main.xml" value="0.12132725430597771" />
+        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/menu/activity_main_drawer.xml" value="0.24564102564102563" />
+        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/menu/main.xml" value="0.17962962962962964" />
         <entry key="..\:/AndroidStudioProjects/Customer/app/src/main/res/drawable-v24/circle.xml" value="0.25625" />
         <entry key="..\:/AndroidStudioProjects/Customer/app/src/main/res/drawable-v24/ic_add.xml" value="0.25625" />
         <entry key="..\:/AndroidStudioProjects/Customer/app/src/main/res/drawable-v24/ic_launcher_background.xml" value="0.14635416666666667" />
@@ -18,6 +38,7 @@
         <entry key="..\:/AndroidStudioProjects/Customer/app/src/main/res/layout/nav_header_main.xml" value="0.2477355072463768" />
         <entry key="..\:/AndroidStudioProjects/Customer/app/src/main/res/menu/activity_main_drawer.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/Customer/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.14635416666666667" />
+        <entry key="..\:/Pratham Yadav/Apps/AAHAR-ENDUSER/app/src/main/res/layout/activity_splash_screen.xml" value="0.27447916666666666" />
       </map>
     </option>
   </component>

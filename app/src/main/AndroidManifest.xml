@@ -10,23 +10,43 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Customer">
         <activity
+<<<<<<< HEAD
+            android:name=".MessInfo"
+            android:exported="false" />
+        <activity
+=======
+<<<<<<< HEAD
+            android:name=".Activity.SplashScreen"
+=======
+>>>>>>> origin
             android:name=".Activity.SignUp"
             android:exported="false" />
         <activity
             android:name=".Activity.MainActivity"
             android:exported="false"
+<<<<<<< HEAD
             android:theme="@style/Theme.Customer.NoActionBar"/>
 
+=======
+            android:theme="@style/Theme.Customer.NoActionBar" />
+>>>>>>> ecdac09c19f27ad24a7110bec9e2841f2c7abdf5
         <activity
             android:name=".Activity.Login"
+>>>>>>> 54df6107bd0c1b62ddc50b313966323cbd6f8339
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Customer.NoActionBar">
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.MainActivity"
+            android:exported="false"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Customer.NoActionBar">
+
         </activity>
     </application>
 
