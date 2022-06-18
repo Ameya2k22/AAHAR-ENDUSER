@@ -10,7 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Customer">
         <activity
+<<<<<<< HEAD
             android:name=".Activity.SplashScreen"
+=======
+            android:name=".Activity.SignUp"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Customer.NoActionBar"/>
+        
+        <activity
+            android:name=".Activity.Login"
+>>>>>>> 54df6107bd0c1b62ddc50b313966323cbd6f8339
             android:exported="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
