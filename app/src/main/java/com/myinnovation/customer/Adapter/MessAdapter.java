@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -19,11 +20,11 @@ import com.myinnovation.customer.R;
 import java.util.ArrayList;
 
 public class MessAdapter extends RecyclerView.Adapter<MessAdapter.VH> {
-    private ArrayList<Customer> customer;
+    private ArrayList<Customer> customerList;
     Context context;
 
     public MessAdapter(ArrayList<Customer> customer, Context context) {
-        this.customer = customer;
+        this.customerList = customer;
         this.context = context;
     }
 
@@ -37,21 +38,21 @@ public class MessAdapter extends RecyclerView.Adapter<MessAdapter.VH> {
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
-        String mess_name, loc;
-        holder.MessName.setText(customer.get(position).getMess_name());
-        holder.Location.setText(customer.get(position).getLocation());
+        Customer customer = customerList.get(position);
+        holder.MessName.setText(customer.getMess_name());
+        holder.Location.setText(customer.getMess_location());
+
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, MessInfo.class);
-                context.startActivity(intent);
+
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return customer.size();
+        return customerList.size();
     }
 
     public class VH extends RecyclerView.ViewHolder {

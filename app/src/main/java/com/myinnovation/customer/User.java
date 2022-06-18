@@ -36,6 +36,8 @@ public class User {
         Phone_no = phone_no;
     }
 
+    private User(){}
+
     public User(String name, String email, String password, String phone_no) {
         Name = name;
         Email = email;

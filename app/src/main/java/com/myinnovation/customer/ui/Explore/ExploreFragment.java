@@ -59,25 +59,11 @@ public class ExploreFragment extends Fragment {
 
         messAdapter = new MessAdapter(customers, getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setNestedScrollingEnabled(true);
         recyclerView.setAdapter(messAdapter);
 
-        database.getReference().child("Customer").child("Mess-Info").child("mess-name").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                    Customer customerInfo = snapshot1.getValue(Customer.class);
-                    customers.add(customerInfo);
-                }
-                messAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        database.getReference().child("Customer").child("Mess-Info").child("mess-location").addListenerForSingleValueEvent(new ValueEventListener() {
+        database.getReference().child("Customer").child("Mess-Info").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
