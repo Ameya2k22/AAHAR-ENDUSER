@@ -2,7 +2,15 @@ package com.myinnovation.customer;
 
 public class Customer {
 
-    private  String mess_email, mess_location, Phone_no, mess_name, monthlyPrice, owner_name, specialDishes;
+    private  String mess_email, mess_location, Phone_no, mess_name, monthlyPrice, owner_name, specialDishes, customer_id;
+
+    public String getCustomer_id() {
+        return customer_id;
+    }
+
+    public void setCustomer_id(String customer_id) {
+        this.customer_id = customer_id;
+    }
 
     public String getMess_name() {
         return mess_name;
@@ -70,5 +78,6 @@ public class Customer {
         this.monthlyPrice = monthlyPrice;
         this.owner_name = owner_name;
         this.specialDishes = specialDishes;
+        this.customer_id = "";
     }
 }

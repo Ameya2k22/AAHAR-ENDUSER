@@ -27,7 +27,7 @@ import com.myinnovation.customer.databinding.FragmentExploreBinding;
 import java.util.ArrayList;
 
 
-public class ExploreFragment extends Fragment implements MessAdapter.RecyclerViewClickListner {
+public class ExploreFragment extends Fragment {
 
     RecyclerView recyclerView;
     MessAdapter messAdapter;
@@ -59,7 +59,7 @@ public class ExploreFragment extends Fragment implements MessAdapter.RecyclerVie
         recyclerView = view.findViewById(R.id.recyclerView);
         customers = new ArrayList<>();
 
-        messAdapter = new MessAdapter(customers, getContext(), this);
+        messAdapter = new MessAdapter(customers, getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setNestedScrollingEnabled(true);
@@ -70,6 +70,7 @@ public class ExploreFragment extends Fragment implements MessAdapter.RecyclerVie
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                     Customer customerInfo = snapshot1.getValue(Customer.class);
+                    customerInfo.setCustomer_id(snapshot1.getKey());
                     customers.add(customerInfo);
                 }
                 messAdapter.notifyDataSetChanged();
@@ -83,11 +84,5 @@ public class ExploreFragment extends Fragment implements MessAdapter.RecyclerVie
         return view;
 
 
-    }
-
-    @Override
-    public void onClick(View v, int position) {
-        Intent intent = new Intent(getContext(), MessInfo.class);
-        startActivity(intent);
     }
 }

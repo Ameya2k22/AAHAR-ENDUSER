@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,13 +28,18 @@ public class MessInfo extends AppCompatActivity {
     Button Join;
     FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    User user;
+    User user
+
+            ;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mess_info);
+
+        Intent startIntent = getIntent();
+        String key = startIntent.getStringExtra("Key");
 
         mess_email = findViewById(R.id.mess_email);
         mess_location = findViewById(R.id.mess_location);
@@ -46,16 +52,40 @@ public class MessInfo extends AppCompatActivity {
         database.getReference().child("Customer").child("Mess-Info").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                    Customer customerInfo = snapshot1.getValue(Customer.class);
-                    mess_email.setText(customerInfo.getMess_email());
-                    mess_location.setText(customerInfo.getMess_location());
-                    mess_name.setText(customerInfo.getMess_name());
-                    monthlyPrice.setText(customerInfo.getMonthlyPrice());
-                    owner_name.setText(customerInfo.getOwner_name());
-                    specialDishes.setText(customerInfo.getSpecialDishes());
-
+                for(DataSnapshot snapshot1 : snapshot.getChildren()){
+                    if(snapshot1.getKey().equals(key)){
+                        Customer customer = snapshot1.getValue(Customer.class);
+                        mess_email.setText(customer.getMess_email());
+                        mess_name.setText(customer.getMess_name());
+                        mess_location.setText(customer.getMess_location());
+                        monthlyPrice.setText(customer.getMonthlyPrice());
+                        owner_name.setText(customer.getOwner_name());
+                        specialDishes.setText(customer.getSpecialDishes());
+                    }
                 }
+                
+                Join.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        database.getReference().child("EndUser").child("Details").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for(DataSnapshot snapshot1:snapshot.getChildren()){
+                                    if(FirebaseAuth.getInstance().getUid().equals(snapshot1.getKey())){
+                                        User user = snapshot1.getValue(User.class);
+                                        user.setMess_id(key);
+                                        database.getReference().child("EndUser").child("Details").child(FirebaseAuth.getInstance().getUid()).setValue(user);
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+                });
             }
 
             @Override
@@ -63,34 +93,5 @@ public class MessInfo extends AppCompatActivity {
 
             }
         });
-
-    Join.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-            database.getReference().child("Customer").child("Details").addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                        String customer_id = snapshot1.getKey();
-                        user.setCustomer_id(customer_id);
-                    }
-                    String id = auth.getUid();
-                    database.getReference().child("EndUser").child("Details").child(id).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            Toast.makeText(MessInfo.this, "Joined", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-            }
-    });
-
     }
 }
