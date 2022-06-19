@@ -74,7 +74,11 @@ public class MessInfo extends AppCompatActivity {
                                     if(FirebaseAuth.getInstance().getUid().equals(snapshot1.getKey())){
                                         User user = snapshot1.getValue(User.class);
                                         user.setMess_id(key);
+                                        StudentInfo studentInfo = new StudentInfo();
+                                        studentInfo.setStudentID(FirebaseAuth.getInstance().getUid());
+                                        studentInfo.setDayRemaining(30);
                                         database.getReference().child("EndUser").child("Details").child(FirebaseAuth.getInstance().getUid()).setValue(user);
+                                        database.getReference().child("Customer").child("Students").child(key).push().setValue(studentInfo);
                                     }
                                 }
                             }
