@@ -2,10 +2,18 @@ package com.myinnovation.customer;
 
 public class User {
 
-    private  String Name, Email, Password, Phone_no;
+    private  String Name, Email, Password, Phone_no, customer_id;
 
     public String getName() {
         return Name;
+    }
+
+    public String getCustomer_id() {
+        return customer_id;
+    }
+
+    public void setCustomer_id(String customer_id) {
+        this.customer_id = customer_id;
     }
 
     public void setName(String name) {

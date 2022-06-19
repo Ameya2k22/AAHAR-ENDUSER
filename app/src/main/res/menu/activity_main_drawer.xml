@@ -13,6 +13,10 @@
             android:icon="@drawable/ic_mess"
             android:title="Explore"/>
         <item
+            android:id="@+id/nav_attendance"
+            android:icon="@drawable/profile_avatar"
+            android:title="Attendance"/>
+        <item
             android:id="@+id/nav_calender"
             android:icon="@drawable/ic_calendar"
             android:title="@string/menu_calender" />

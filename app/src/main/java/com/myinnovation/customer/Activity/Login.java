@@ -49,7 +49,7 @@ public class Login extends AppCompatActivity {
                             startActivity(intent);
                         }
                         else{
-                            Toast.makeText(com.myinnovation.customer.Activity.Login.this, "Error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "Error", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
