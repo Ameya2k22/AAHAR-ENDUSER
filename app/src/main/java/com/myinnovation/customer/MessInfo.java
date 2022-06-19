@@ -28,10 +28,7 @@ public class MessInfo extends AppCompatActivity {
     Button Join;
     FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    User user
-
-            ;
-
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

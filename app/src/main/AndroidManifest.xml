@@ -16,10 +16,10 @@
             android:name=".Activity.SplashScreen"
             android:exported="true" />
         <activity
-            android:name=".Activity.Login"
+            android:name=".Activity.SignUp"
             android:exported="false" />
         <activity
-            android:name=".Activity.SignUp"
+            android:name=".Activity.Login"
             android:exported="false"
             android:theme="@style/Theme.Customer.NoActionBar"/>
         <activity

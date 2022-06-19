@@ -2,9 +2,10 @@ package com.myinnovation.customer.ui.Attendance;
 
 import android.os.Bundle;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,18 +76,17 @@ public class AttendanceFragment extends Fragment {
                                     radioButton2.setEnabled(true);
                                     submit.setEnabled(true);
 
-
                                     submit.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
                                             int selectedID = radioGroup.getCheckedRadioButtonId();
                                             rButton =  (RadioButton) view.findViewById(selectedID);
-
-                                            if(selectedID == -1){
-
+                                            if(selectedID == R.id.yes){
+                                                String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+//                                                FirebaseDatabase.getInstance().getReference().child("Customer").child("Day Wise Attendance").child(date).
                                             }
-                                            else{
-                                                Toast.makeText(getActivity(), rButton.getText().toString(), Toast.LENGTH_SHORT).show();
+                                            else if(selectedID == R.id.no){
+
                                             }
 
                                         }

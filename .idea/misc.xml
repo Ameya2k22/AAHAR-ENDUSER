@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ACM Hackathon/AAHAR-ENDUSER/app/src/main/res/layout/activity_mess_info.xml" value="0.1796875" />
         <entry key="..\:/ACM Hackathon/AAHAR-ENDUSER/app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
         <entry key="..\:/ACM Hackathon/AAHAR-ENDUSER/app/src/main/res/layout/fragment_attendance.xml" value="0.16111111111111112" />
         <entry key="..\:/ACM Hackathon/AAHAR-ENDUSER/app/src/main/res/layout/fragment_explore.xml" value="0.1796875" />
         <entry key="..\:/ACM Hackathon/AAHAR-ENDUSER/app/src/main/res/layout/fragment_home.xml" value="0.1796875" />
+        <entry key="..\:/ACM Hackathon/AAHAR-ENDUSER/app/src/main/res/layout/fragment_notification.xml" value="0.1796875" />
         <entry key="..\:/ACM Hackathon/AAHAR-ENDUSER/app/src/main/res/layout/home_list.xml" value="0.1796875" />
         <entry key="..\:/ACM Hackathon/AAHAR-ENDUSER/app/src/main/res/layout/mess_list.xml" value="0.1796875" />
         <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/drawable-v21/ic_menu_slideshow.xml" value="0.2625" />
@@ -17,8 +19,7 @@
         <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/layout/activity_login.xml" value="0.1598731884057971" />
         <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/layout/activity_mess_info.xml" value="0.1" />
         <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/layout/activity_sign_up.xml" value="0.1598731884057971" />
-        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/layout/fragment_attendance.xml" value="0.2" />
-        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/layout/fragment_home.xml" value="0.22871376811594202" />
+        <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/layout/fragment_attendance.xml" value="0.1585144927536232" />
         <entry key="..\:/Ameya/AAHAR-ENDUSER/app/src/main/res/menu/activity_main_drawer.xml" value="0.24256410256410257" />
         <entry key="..\:/AndroidStudioProjects/Customer/app/src/main/res/drawable-v24/circle.xml" value="0.25625" />
         <entry key="..\:/AndroidStudioProjects/Customer/app/src/main/res/drawable-v24/ic_add.xml" value="0.25625" />
