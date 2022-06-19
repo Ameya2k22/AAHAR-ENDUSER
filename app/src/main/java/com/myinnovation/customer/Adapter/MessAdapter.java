@@ -40,7 +40,6 @@ public class MessAdapter extends RecyclerView.Adapter<MessAdapter.VH> {
         Customer customer = customerList.get(position);
         holder.MessName.setText(customer.getMess_name());
         holder.Location.setText(customer.getMess_location());
-
     }
 
 

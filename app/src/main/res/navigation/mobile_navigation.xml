@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/nav_attendance"
-        android:name="com.myinnovation.customer.ui.Notification.AttendanceFragment"
+        android:name="com.myinnovation.customer.ui.Attendance.AttendanceFragment"
         android:label="Attendance"
         tools:layout="@layout/fragment_attendance" />
 

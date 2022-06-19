@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -48,23 +49,7 @@ public class AttendanceFragment extends Fragment {
         yes.setEnabled(false);
         no.setEnabled(false);
 
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseDatabase.getInstance().getReference().child("Customer").child("Attendance").child(user.getCustomer_id()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String session = snapshot.getKey();
-                if(session.equals("true")){
-                    yes.setEnabled(true);
-                    no.setEnabled(true);
-                }
-            }
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        Toast.makeText(getActivity(), "Hello World", Toast.LENGTH_SHORT).show();
 
 
 
