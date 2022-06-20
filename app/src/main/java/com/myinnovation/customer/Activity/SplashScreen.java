@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.myinnovation.customer.R;
 
 public class SplashScreen extends AppCompatActivity {
     ImageView image;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,5 +29,14 @@ public class SplashScreen extends AppCompatActivity {
                 startActivity(i);
             }
         },4000);
+    }
+
+        @Override
+    protected void onStart() {
+        super.onStart();
+        if(mAuth.getCurrentUser() != null){
+            Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+            startActivity(intent);
+        }
     }
 }

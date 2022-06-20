@@ -1,4 +1,4 @@
-package com.myinnovation.customer;
+package com.myinnovation.customer.Models;
 
 public class StudentInfo {
     public String studentID;

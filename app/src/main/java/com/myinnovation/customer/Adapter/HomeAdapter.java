@@ -5,12 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.myinnovation.customer.Customer;
+import com.myinnovation.customer.Models.Customer;
 import com.myinnovation.customer.R;
 
 import java.util.ArrayList;

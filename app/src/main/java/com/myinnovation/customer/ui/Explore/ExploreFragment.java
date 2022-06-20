@@ -1,6 +1,5 @@
 package com.myinnovation.customer.ui.Explore;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -19,8 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.myinnovation.customer.Adapter.MessAdapter;
-import com.myinnovation.customer.Customer;
-import com.myinnovation.customer.MessInfo;
+import com.myinnovation.customer.Models.Customer;
 import com.myinnovation.customer.R;
 import com.myinnovation.customer.databinding.FragmentExploreBinding;
 

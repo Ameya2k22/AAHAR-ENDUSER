@@ -1,27 +1,20 @@
-package com.myinnovation.customer;
+package com.myinnovation.customer.Models;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.myinnovation.customer.Activity.SignUp;
-
-import java.util.ArrayList;
+import com.myinnovation.customer.R;
 
 public class MessInfo extends AppCompatActivity {
     TextView mess_email, mess_location, mess_name, monthlyPrice, owner_name, specialDishes;

@@ -1,8 +1,8 @@
-package com.myinnovation.customer;
+package com.myinnovation.customer.Models;
 
 public class User {
 
-    private  String Name, Email, Password, Phone_no, mess_id, user_id;
+    private  String Name, Email, Password, Phone_no, image, mess_id, user_id;
 
     public String getName() {
         return Name;
@@ -14,22 +14,6 @@ public class User {
 
     public String getEmail() {
         return Email;
-    }
-
-    public String getMess_id() {
-        return mess_id;
-    }
-
-    public void setMess_id(String mess_id) {
-        this.mess_id = mess_id;
-    }
-
-    public String getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
     }
 
     public void setEmail(String email) {
@@ -52,12 +36,35 @@ public class User {
         Phone_no = phone_no;
     }
 
-    private User(){}
+    public String getMess_id() {
+        return mess_id;
+    }
 
-    public User(String name, String email, String password, String phone_no) {
+    public void setMess_id(String mess_id) {
+        this.mess_id = mess_id;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
+    public User(String name, String email, String password, String phone_no, String image) {
         Name = name;
         Email = email;
         Password = password;
         Phone_no = phone_no;
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
