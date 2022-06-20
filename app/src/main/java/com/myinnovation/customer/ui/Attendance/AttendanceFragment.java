@@ -4,8 +4,13 @@ import android.os.Bundle;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import android.text.TextPaint;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.myinnovation.customer.Customer;
 import com.myinnovation.customer.R;
+import com.myinnovation.customer.StudentInfo;
 import com.myinnovation.customer.User;
 import com.myinnovation.customer.databinding.FragmentAttendanceBinding;
 
@@ -82,13 +88,64 @@ public class AttendanceFragment extends Fragment {
                                             int selectedID = radioGroup.getCheckedRadioButtonId();
                                             rButton =  (RadioButton) view.findViewById(selectedID);
                                             if(selectedID == R.id.yes){
-                                                String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-//                                                FirebaseDatabase.getInstance().getReference().child("Customer").child("Day Wise Attendance").child(date).
+                                                FirebaseDatabase.getInstance().getReference()
+                                                        .child("EndUser")
+                                                        .child("Details")
+                                                        .child(FirebaseAuth.getInstance().getUid())
+                                                        .child("mess_id").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        String mess_id = snapshot.getValue(String.class);
+                                                        FirebaseDatabase.getInstance().getReference()
+                                                                .child("Customer")
+                                                                .child("Students")
+                                                                .child(mess_id)
+                                                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                    @Override
+                                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                        for(DataSnapshot snapshot2:snapshot.getChildren()){
+                                                                            StudentInfo studentInfo = snapshot2.getValue(StudentInfo.class);
+                                                                            if(studentInfo.getStudentID().equals(FirebaseAuth.getInstance().getUid())){
+                                                                                long day = studentInfo.getDayRemaining();
+                                                                                day = day-1;
+                                                                                studentInfo.setDayRemaining(day);
+                                                                                FirebaseDatabase.getInstance().getReference()
+                                                                                        .child("Customer")
+                                                                                        .child("Students")
+                                                                                        .child(mess_id)
+                                                                                        .child(snapshot2.getKey())
+                                                                                        .setValue(studentInfo);
+                                                                            }
+                                                                        }
+                                                                    }
+
+                                                                    @Override
+                                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                    }
+                                                                });
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                    }
+                                                });
+                                                String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+                                                FirebaseDatabase.getInstance().getReference()
+                                                        .child("EndUser")
+                                                        .child("Attendance")
+                                                        .child(FirebaseAuth.getInstance().getUid())
+                                                        .child(date).setValue("Present");
                                             }
                                             else if(selectedID == R.id.no){
-
+                                                String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+                                                FirebaseDatabase.getInstance().getReference()
+                                                        .child("EndUser")
+                                                        .child("Attendance")
+                                                        .child(FirebaseAuth.getInstance().getUid())
+                                                        .child(date).setValue("False");
                                             }
-
                                         }
                                     });
                                 }
