@@ -2,6 +2,7 @@ package com.myinnovation.customer.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,6 +38,6 @@ public class ReviewsActivity extends AppCompatActivity {
         binding.myReview.setEnabled(true);
 
         // else
-        binding.myReview.setEnabled(false);
+//        binding.myReview.setEnabled(false);
     }
 }

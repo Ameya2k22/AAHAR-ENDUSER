@@ -16,7 +16,6 @@ import com.myinnovation.customer.Activity.MessDetailActivity;
 import com.myinnovation.customer.Models.Customer;
 import com.myinnovation.customer.R;
 import com.myinnovation.customer.databinding.SingleMessLayoutBinding;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -43,10 +42,10 @@ public class MessAdapter extends RecyclerView.Adapter<MessAdapter.VH> {
         holder.binding.MessName.setText(customer.getMess_name());
         holder.binding.Location.setText(customer.getMess_location());
 
-        Picasso.get()
-                .load(customer.getImage())
-                .placeholder(R.drawable.aahar_logo)
-                .into(holder.binding.image);
+//        Picasso.get()
+//                .load(customer.getImage())
+//                .placeholder(R.drawable.aahar_logo)
+//                .into(holder.binding.image);
 
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), MessDetailActivity.class);

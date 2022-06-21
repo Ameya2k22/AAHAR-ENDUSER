@@ -44,9 +44,6 @@ public class MessDetailActivity extends AppCompatActivity {
             startActivity(new Intent(this, ReviewsActivity.class));
         });
 
-        binding.ratings.setOnClickListener(v -> {
-            startActivity(new Intent(this, RatingActivity.class));
-        });
 
         database.getReference().child("Customer").child("Mess-Info").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

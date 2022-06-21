@@ -354,30 +354,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ratings" />
 
-        <TextView
-            android:id="@+id/ratings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:drawablePadding="16dp"
-            android:fontFamily="@font/oswald"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="@string/ratings"
-            android:textColor="@color/green"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:drawableStartCompat="@android:drawable/star_big_off"
-            app:drawableTint="@color/dark_yellow"
-            app:layout_constraintEnd_toEndOf="@+id/textView8"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
-
-
     </LinearLayout>
 
 
