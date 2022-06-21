@@ -38,18 +38,45 @@ public class MyReviewActivity extends AppCompatActivity {
         reviewBody = findViewById(R.id.review_message);
         addButton = findViewById(R.id.add_review);
 
+        FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(FirebaseAuth.getInstance().getUid()).child("mess_id").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String id = snapshot.getValue(String.class);
+
+                FirebaseDatabase.getInstance().getReference().child("Customer").child("Reviews").child(id).child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            Reviews reviews = snapshot.getValue(Reviews.class);
+                            reviewTitle.setText(reviews.getReviewTitle());
+                            reviewBody.setText(reviews.getReviewBody());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String title = reviewTitle.getText().toString();
-                String body = reviewBody.getText().toString();
 
-                Reviews reviews = new Reviews(title, body);
                 FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(FirebaseAuth.getInstance().getUid()).child("mess_id").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String id = snapshot.getValue(String.class);
+                        String title = reviewTitle.getText().toString();
+                        String body = reviewBody.getText().toString();
 
+                        Reviews reviews = new Reviews(title, body);
                         FirebaseDatabase.getInstance().getReference().child("Customer").child("Reviews").child(id).child(FirebaseAuth.getInstance().getUid()).setValue(reviews).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
