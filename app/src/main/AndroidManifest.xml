@@ -9,9 +9,31 @@
         android:roundIcon="@drawable/aahar_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.Customer">
+
         <activity
-            android:name=".Models.MessInfo"
+            android:name=".Activity.LoginActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".Activity.SignUpActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Activity.MessDetailActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Activity.MyReviewActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Activity.OtpVerificationActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Activity.PaymentActivity"
+            android:exported="false" />
+
         <activity
             android:name=".Activity.SplashScreen"
             android:exported="true" />
