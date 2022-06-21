@@ -55,4 +55,6 @@
     <string name="complaints_and_reviews">Complaints and Reviews</string>
     <string name="ratings">Ratings</string>
     <string name="price_per_month">Price per month :</string>
+    <string name="edit_rating">Edit Rating</string>
+    <string name="overall_rating">Orange Rating</string>
 </resources>

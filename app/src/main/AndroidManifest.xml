@@ -9,17 +9,12 @@
         android:roundIcon="@drawable/aahar_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.Customer">
-
         <activity
             android:name=".Activity.LoginActivity"
             android:exported="false" />
 
         <activity
-            android:name=".Activity.SignUpActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".Activity.MessDetailActivity"
+            android:name=".Activity.ReviewsActivity"
             android:exported="false" />
 
         <activity
@@ -27,15 +22,23 @@
             android:exported="false" />
 
         <activity
-            android:name=".Activity.OtpVerificationActivity"
+            android:name=".Activity.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.MessDetailActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".Activity.OtpVerificationActivity"
+            android:exported="false" />
         <activity
             android:name=".Activity.PaymentActivity"
             android:exported="false" />
-
         <activity
             android:name=".Activity.SplashScreen"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.RatingActivity"
             android:exported="true" />
         <activity
             android:name=".Activity.MainActivity"
