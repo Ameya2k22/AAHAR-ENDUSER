@@ -56,29 +56,24 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
 
         binding.customCalendar.setMapDescToProp(descHashMap);
 
+        // Initialize date hashmap
         HashMap<Integer,Object> dateHashmap=new HashMap<>();
 
+        // initialize calendar
         Calendar calendar=  Calendar.getInstance();
 
+        // Put values
         dateHashmap.put(calendar.get(Calendar.DAY_OF_MONTH),"current");
         dateHashmap.put(1,"present");
         dateHashmap.put(3,"present");
+        dateHashmap.put(20,"present");
         dateHashmap.put(5,"present");
-        dateHashmap.put(11,"present");
-        dateHashmap.put(13,"present");
+        dateHashmap.put(12,"present");
         dateHashmap.put(21,"present");
-        dateHashmap.put(22,"present");
-        dateHashmap.put(23,"present");
-        dateHashmap.put(28,"present");
 
 
-        binding.customCalendar.setOnDateSelectedListener((view, selectedDate, desc) -> {
-            String sDate = selectedDate.get(Calendar.DAY_OF_MONTH)
-                    + "/" + (selectedDate.get(Calendar.MONTH) + 1)
-                    + "/" + selectedDate.get(Calendar.YEAR);
-
-            Toast.makeText(getContext(), sDate, Toast.LENGTH_SHORT).show();
-        });
+        // set date
+        binding.customCalendar.setDate(calendar,dateHashmap);
 
         return binding.getRoot();
     }
@@ -161,18 +156,6 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                     dateMap[1] = null;
                     break;
 
-                case Calendar.JUNE:
-                    dateMap[0] = new HashMap<>();
-                    dateMap[0].put(3, "present");
-                    dateMap[0].put(8, "present");
-                    dateMap[0].put(19, "present");
-                    dateMap[0].put(1, "present");
-                    dateMap[0].put(5, "present");
-                    dateMap[0].put(12, "present");
-                    dateMap[0].put(21, "present");
-                    dateMap[0].put(31, "present");
-                    dateMap[1] = null;
-                    break;
                 case Calendar.JULY:
 
                     break;
