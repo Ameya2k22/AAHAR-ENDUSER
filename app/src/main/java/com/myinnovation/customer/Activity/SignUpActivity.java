@@ -82,7 +82,7 @@ public class SignUpActivity extends AppCompatActivity {
         username = binding.regUsername.getText().toString();
         mobile = binding.regMobile.getText().toString();
 
-        if(userImageUri.equals("") || userImage.equals("") || userImage.isEmpty()){
+        if(userImage.equals("") || userImage.isEmpty()){
             Toast.makeText(this, "User Image can't be empty.", Toast.LENGTH_LONG).show();
             return;
         }
