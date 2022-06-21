@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/mess_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -32,8 +32,8 @@
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -41,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/mess_name"
         app:srcCompat="@drawable/aahar_logo" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -136,7 +136,7 @@
 
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/mess_mobile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -145,6 +145,40 @@
                 android:inputType="textMultiLine"
                 android:minHeight="48dp"
                 android:text="9054687412"
+                android:textColor="@color/grey"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/email_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/oswald"
+                android:text="Email : "
+                android:textColor="@color/green"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/mess_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/oswald"
+                android:gravity="center"
+                android:inputType="textMultiLine"
+                android:minHeight="48dp"
+                android:text="abc@gmail.com"
                 android:textColor="@color/grey"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -297,7 +331,7 @@
             app:layout_constraintTop_toBottomOf="@+id/owner_name" />
 
         <TextView
-            android:id="@+id/textView19"
+            android:id="@+id/complaints_and_reviews"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -318,10 +352,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+            app:layout_constraintTop_toBottomOf="@+id/ratings" />
 
         <TextView
-            android:id="@+id/textView17"
+            android:id="@+id/ratings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"

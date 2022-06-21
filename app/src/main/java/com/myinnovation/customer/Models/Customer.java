@@ -2,7 +2,16 @@ package com.myinnovation.customer.Models;
 
 public class Customer {
 
+    private String image;
     private  String mess_email, mess_location, Phone_no, mess_name, monthlyPrice, owner_name, specialDishes, customer_id;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getCustomer_id() {
         return customer_id;
