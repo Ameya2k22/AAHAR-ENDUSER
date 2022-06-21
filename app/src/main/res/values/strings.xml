@@ -58,4 +58,5 @@
     <string name="edit_rating">Edit Rating</string>
     <string name="overall_rating">Overall Rating</string>
     <string name="congratulations_payment_is_successfully_done">Congratulations Payment is successfully done</string>
+    <string name="total_present_day_in_this_month">Total Present Day in this Month</string>
 </resources>
