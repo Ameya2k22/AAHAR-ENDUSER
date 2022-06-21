@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -27,6 +29,8 @@ import com.myinnovation.customer.Models.User;
 import com.myinnovation.customer.databinding.FragmentAttendanceBinding;
 
 public class AttendanceFragment extends Fragment {
+
+    TextView yesButton, noButton;
 
     public AttendanceFragment() {
     }
@@ -152,6 +156,58 @@ public class AttendanceFragment extends Fragment {
 //                        });
 //                    }
 //
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+
+//        yesButton = binding.yes;
+//        noButton = binding.no;
+//
+//        yesButton.setEnabled(false);
+//        noButton.setEnabled(false);
+//
+//        FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for(DataSnapshot snapshot1:snapshot.getChildren()){
+//                    User user = snapshot1.getValue(User.class);
+//                    String id = user.getMess_id();
+//
+//                    FirebaseDatabase.getInstance().getReference().child("Customer").child("Attendance").child(id).child("SessionOn").addListenerForSingleValueEvent(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                            boolean ans = snapshot.getValue(Boolean.class);
+//                            if(ans){
+//                                yesButton.setOnClickListener(new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View view) {
+//
+//                                    }
+//                                });
+//
+//                                noButton.setOnClickListener(new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View view) {
+//
+//                                    }
+//                                });
+//                            }
+//                            else{
+//                                yesButton.setEnabled(false);
+//                                noButton.setEnabled(false);
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError error) {
+//
+//                        }
+//                    });
 //                }
 //            }
 //

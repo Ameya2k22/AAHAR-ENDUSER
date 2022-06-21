@@ -60,6 +60,8 @@ public class User {
         this.image = image;
     }
 
+    public User(){}
+
     public String getImage() {
         return image;
     }
