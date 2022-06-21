@@ -56,7 +56,13 @@
     <string name="ratings">Ratings</string>
     <string name="price_per_month">Price per month :</string>
     <string name="edit_rating">Edit Rating</string>
+<<<<<<< HEAD
     <string name="overall_rating">Orange Rating</string>
     <string name="congratulations_payment_is_successfully_done">Congratulations Payment is successfully done</string>
 
+=======
+    <string name="overall_rating">Overall Rating</string>
+    <string name="congratulations_payment_is_successfully_done">Congratulations Payment is successfully done</string>
+    <string name="total_present_day_in_this_month">Total Present Day in this Month</string>
+>>>>>>> a358eb1a2f4b8b4f30bd724259c4d8baf5563e2c
 </resources>
