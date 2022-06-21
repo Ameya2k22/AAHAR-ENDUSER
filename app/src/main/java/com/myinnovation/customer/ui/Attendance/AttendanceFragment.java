@@ -1,13 +1,16 @@
 package com.myinnovation.customer.ui.Attendance;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -44,6 +47,7 @@ public class AttendanceFragment extends Fragment {
     }
     private FragmentAttendanceBinding binding;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,103 +56,149 @@ public class AttendanceFragment extends Fragment {
         yesButton = binding.yes;
         noButton = binding.no;
 
+        binding.attendanceDate2.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date()));
+        binding.attendanceDay2.setText(LocalDate.now().getDayOfWeek().name());
+
+        binding.attendanceDate.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date()));
+        binding.attendanceDay.setText(LocalDate.now().getDayOfWeek().name());
+
         yesButton.setEnabled(false);
         noButton.setEnabled(false);
 
-        FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snapshot1:snapshot.getChildren()){
-                    User user = snapshot1.getValue(User.class);
+                    User user = snapshot.getValue(User.class);
                     String id = user.getMess_id();
 
                     FirebaseDatabase.getInstance().getReference().child("Customer").child("Attendance").child(id).child("SessionOn").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            boolean ans = snapshot.getValue(Boolean.class);
-                            if(ans){
-                                yesButton.setEnabled(true);
-                                noButton.setEnabled(true);
-                                yesButton.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        FirebaseDatabase.getInstance().getReference()
-                                                .child("EndUser")
-                                                .child("Details")
-                                                .child(FirebaseAuth.getInstance().getUid())
-                                                .child("mess_id").addListenerForSingleValueEvent(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                String mess_id = snapshot.getValue(String.class);
-                                                FirebaseDatabase.getInstance().getReference()
-                                                        .child("Customer")
-                                                        .child("Students")
-                                                        .child(mess_id)
-                                                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                                                            @Override
-                                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                                for(DataSnapshot snapshot2:snapshot.getChildren()){
-                                                                    StudentInfo studentInfo = snapshot2.getValue(StudentInfo.class);
-                                                                    if(studentInfo.getStudentID().equals(FirebaseAuth.getInstance().getUid())){
-                                                                        long day = studentInfo.getDayRemaining();
-                                                                        day = day-1;
-                                                                        studentInfo.setDayRemaining(day);
-                                                                        FirebaseDatabase.getInstance().getReference()
-                                                                                .child("Customer")
-                                                                                .child("Students")
-                                                                                .child(mess_id)
-                                                                                .child(snapshot2.getKey())
-                                                                                .setValue(studentInfo);
+                            if(snapshot.exists()){
+                                boolean ans = snapshot.getValue(Boolean.class);
+                                if(ans){
+                                    binding.AttendanceVerificationCardview.setVisibility(View.GONE);
+                                    binding.AttendanceCardView.setVisibility(View.VISIBLE);
+                                    yesButton.setEnabled(true);
+                                    noButton.setEnabled(true);
+                                    yesButton.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            FirebaseDatabase.getInstance().getReference()
+                                                    .child("EndUser")
+                                                    .child("Details")
+                                                    .child(FirebaseAuth.getInstance().getUid())
+                                                    .child("mess_id").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    String mess_id = snapshot.getValue(String.class);
+                                                    FirebaseDatabase.getInstance().getReference()
+                                                            .child("Customer")
+                                                            .child("Students")
+                                                            .child(mess_id)
+                                                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    for(DataSnapshot snapshot2:snapshot.getChildren()){
+                                                                        StudentInfo studentInfo = snapshot2.getValue(StudentInfo.class);
+                                                                        if(studentInfo.getStudentID().equals(FirebaseAuth.getInstance().getUid())){
+                                                                            long day = studentInfo.getDayRemaining();
+                                                                            day = day-1;
+                                                                            studentInfo.setDayRemaining(day);
+                                                                            FirebaseDatabase.getInstance().getReference()
+                                                                                    .child("Customer")
+                                                                                    .child("Students")
+                                                                                    .child(mess_id)
+                                                                                    .child(snapshot2.getKey())
+                                                                                    .setValue(studentInfo);
+                                                                        }
                                                                     }
                                                                 }
-                                                            }
 
-                                                            @Override
-                                                            public void onCancelled(@NonNull DatabaseError error) {
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
 
-                                                            }
-                                                        });
-                                            }
+                                                                }
+                                                            });
+                                                }
 
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
 
-                                            }
-                                        });
+                                                }
+                                            });
 
-                                        Calendar calendar = Calendar.getInstance();
-                                        String year = String.valueOf(calendar.get(Calendar.YEAR));
-                                        String month = String.valueOf(calendar.get(Calendar.MONTH));
-                                        String day = String.valueOf(calendar.get(Calendar.DATE));
-                                        FirebaseDatabase.getInstance().getReference()
-                                                .child("EndUser")
-                                                .child("Attendance")
-                                                .child(FirebaseAuth.getInstance().getUid())
-                                                .child(year).child(month).child(day).setValue("Present");
+                                            Calendar calendar = Calendar.getInstance();
+                                            String year = String.valueOf(calendar.get(Calendar.YEAR));
+                                            String month = String.valueOf(calendar.get(Calendar.MONTH));
+                                            String day = String.valueOf(calendar.get(Calendar.DATE));
+                                            FirebaseDatabase.getInstance().getReference()
+                                                    .child("EndUser")
+                                                    .child("Attendance")
+                                                    .child(FirebaseAuth.getInstance().getUid())
+                                                    .child(year).child(month).child(day).setValue("Present");
 
-                                        Toast.makeText(getActivity(), "Attendance Submitted Successfully", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                                            String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+                                            FirebaseDatabase.getInstance().getReference().child("Customer").child("AttendanceByDay").child(id).child(date).child(FirebaseAuth.getInstance().getUid()).setValue(true);
 
-                                noButton.setOnClickListener(new View.OnClickListener() {
+                                            Toast.makeText(getActivity(), "Attendance Submitted Successfully", Toast.LENGTH_SHORT).show();
+                                            binding.AttendanceVerificationCardview.setVisibility(View.VISIBLE);
+                                            binding.AttendanceCardView.setVisibility(View.GONE);
+                                        }
+                                    });
+
+                                    noButton.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+                                            Calendar calendar = Calendar.getInstance();
+                                            String year = String.valueOf(calendar.get(Calendar.YEAR));
+                                            String month = String.valueOf(calendar.get(Calendar.MONTH));
+                                            String day = String.valueOf(calendar.get(Calendar.DATE));
+                                            FirebaseDatabase.getInstance().getReference()
+                                                    .child("EndUser")
+                                                    .child("Attendance")
+                                                    .child(FirebaseAuth.getInstance().getUid())
+                                                    .child(year).child(month).child(day).setValue("Absent");
+                                        }
+                                    });
+                                }
+                                else{
+                                    yesButton.setEnabled(false);
+                                    noButton.setEnabled(false);
+                                }
+
+                                FirebaseDatabase.getInstance().getReference().child("Customer").child("Students").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @RequiresApi(api = Build.VERSION_CODES.O)
                                     @Override
-                                    public void onClick(View view) {
+                                    public void onDataChange(@NonNull DataSnapshot snapshot4) {
+                                        for(DataSnapshot snapshot1:snapshot4.getChildren()){
+                                            StudentInfo studentInfo = snapshot1.getValue(StudentInfo.class);
+                                            binding.daysRemaining.setText(String.valueOf(studentInfo.getDayRemaining()-1));
+                                            FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(studentInfo.getStudentID()).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    String name1 = snapshot.getValue(String.class);
+                                                    binding.username.setText(name1);
+                                                }
 
-                                        Calendar calendar = Calendar.getInstance();
-                                        String year = String.valueOf(calendar.get(Calendar.YEAR));
-                                        String month = String.valueOf(calendar.get(Calendar.MONTH));
-                                        String day = String.valueOf(calendar.get(Calendar.DATE));
-                                        FirebaseDatabase.getInstance().getReference()
-                                                .child("EndUser")
-                                                .child("Attendance")
-                                                .child(FirebaseAuth.getInstance().getUid())
-                                                .child(year).child(month).child(day).setValue("Absent");
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                }
+                                            });
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
                                     }
                                 });
+
                             }
                             else{
-                                yesButton.setEnabled(false);
-                                noButton.setEnabled(false);
+                                Toast.makeText(getActivity(), "You aren't joined to any mess", Toast.LENGTH_SHORT).show();
                             }
                         }
 
@@ -157,7 +207,6 @@ public class AttendanceFragment extends Fragment {
 
                         }
                     });
-                }
             }
 
             @Override

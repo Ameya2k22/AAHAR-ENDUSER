@@ -19,17 +19,13 @@ public class RatingActivity extends AppCompatActivity {
 
     ActivityRatingBinding binding;
     private float ratingValue = 0;
-<<<<<<< HEAD
-=======
     private float messRatingValue = 0;
->>>>>>> be4948e79adc308288efd8217b07edd1594f3911
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityRatingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-<<<<<<< HEAD
         // get rating value from database and set to rating bar.
 
         binding.editRatingBtn.setOnClickListener(v -> {
@@ -38,7 +34,6 @@ public class RatingActivity extends AppCompatActivity {
         });
 
 
-=======
         FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(FirebaseAuth.getInstance().getUid()).child("mess_id").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -101,13 +96,11 @@ public class RatingActivity extends AppCompatActivity {
             }
         });
 
->>>>>>> be4948e79adc308288efd8217b07edd1594f3911
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-<<<<<<< HEAD
 
         // check whether user joined in this mess or not.
 
@@ -117,9 +110,5 @@ public class RatingActivity extends AppCompatActivity {
         // else
 //        binding.ratingBar.setEnabled(false);
 //        binding.editRatingBtn.setEnabled(false);
-=======
-        binding.ratingBar.setEnabled(true);
-        binding.editRatingBtn.setEnabled(true);
->>>>>>> be4948e79adc308288efd8217b07edd1594f3911
     }
 }

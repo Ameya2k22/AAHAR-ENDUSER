@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:cardCornerRadius="16dp"
         app:cardElevation="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -183,7 +183,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="16dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:cardCornerRadius="16dp"
         app:cardElevation="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -222,12 +222,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/userProfileImage" />
 
             <TextView
-                android:id="@+id/attendanceDay"
+                android:id="@+id/attendanceDay2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/oswald"
-                android:text="Sunday"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="28sp"
                 android:textStyle="bold"
@@ -236,19 +236,19 @@
                 app:layout_constraintTop_toTopOf="@+id/view11" />
 
             <TextView
-                android:id="@+id/attendanceDate"
+                android:id="@+id/attendanceDate2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="36dp"
                 android:fontFamily="@font/oswald"
-                android:text="19/06/2022"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="28sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/attendanceDay"
+                app:layout_constraintEnd_toEndOf="@+id/attendanceDay2"
                 app:layout_constraintHorizontal_bias="0.509"
-                app:layout_constraintStart_toStartOf="@+id/attendanceDay"
-                app:layout_constraintTop_toBottomOf="@+id/attendanceDay" />
+                app:layout_constraintStart_toStartOf="@+id/attendanceDay2"
+                app:layout_constraintTop_toBottomOf="@+id/attendanceDay2" />
 
             <TextView
                 android:id="@+id/username"
@@ -256,14 +256,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="48dp"
                 android:fontFamily="@font/oswald"
-                android:text="Mahesh Pimpale"
+                android:text=""
                 android:textColor="@color/red"
                 android:textSize="28sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/view11"
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="@+id/view11"
-                app:layout_constraintTop_toBottomOf="@+id/attendanceDate" />
+                app:layout_constraintTop_toBottomOf="@+id/attendanceDate2" />
 
             <TextView
                 android:id="@+id/days_remaining"
@@ -275,7 +275,7 @@
                 android:gravity="center"
                 android:inputType="textMultiLine"
                 android:minHeight="48dp"
-                android:text="25"
+                android:text=""
                 android:textColor="@color/dark_red"
                 android:textSize="32sp"
                 android:textStyle="bold"

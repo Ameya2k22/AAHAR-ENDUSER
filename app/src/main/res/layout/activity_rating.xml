@@ -7,25 +7,6 @@
     android:background="@drawable/curve_bg_2"
     tools:context=".Activity.RatingActivity">
 
-<<<<<<< HEAD
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="136dp"
-        android:numStars="5"
-        android:clickable="false"
-        android:progressBackgroundTint="@color/white"
-        android:progressTint="@color/green"
-        android:rating="3.5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/attendanceDay"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-=======
->>>>>>> be4948e79adc308288efd8217b07edd1594f3911
     <TextView
         android:id="@+id/attendanceDay"
         android:layout_width="wrap_content"
@@ -33,11 +14,7 @@
         android:layout_marginTop="60dp"
         android:fontFamily="@font/oswald"
         android:text="@string/overall_rating"
-<<<<<<< HEAD
         android:textColor="@color/blue"
-=======
-        android:textColor="@color/green"
->>>>>>> be4948e79adc308288efd8217b07edd1594f3911
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -170,23 +147,15 @@
         android:id="@+id/edit_rating_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
         android:layout_marginTop="140dp"
         android:background="@drawable/rounded_box"
-=======
-        android:background="@drawable/rounded_box"
         android:clickable="false"
->>>>>>> be4948e79adc308288efd8217b07edd1594f3911
         android:fontFamily="@font/oswald"
         android:padding="16dp"
         android:text="@string/edit_rating"
         android:textColor="#0D47A1"
         android:textSize="20sp"
         android:textStyle="bold"
-<<<<<<< HEAD
-        android:clickable="false"
-=======
->>>>>>> be4948e79adc308288efd8217b07edd1594f3911
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
