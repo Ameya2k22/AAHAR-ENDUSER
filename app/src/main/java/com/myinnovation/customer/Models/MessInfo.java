@@ -31,7 +31,6 @@ public class MessInfo extends AppCompatActivity {
         Intent startIntent = getIntent();
         String key = startIntent.getStringExtra("Key");
 
-        mess_email = findViewById(R.id.mess_email);
         mess_location = findViewById(R.id.mess_location);
         mess_name = findViewById(R.id.mess_name);
         monthlyPrice = findViewById(R.id.monthlyPrice);
@@ -45,7 +44,7 @@ public class MessInfo extends AppCompatActivity {
                 for(DataSnapshot snapshot1 : snapshot.getChildren()){
                     if(snapshot1.getKey().equals(key)){
                         Customer customer = snapshot1.getValue(Customer.class);
-                        mess_email.setText(customer.getMess_email());
+//                        mess_email.setText(customer.getMess_email());
                         mess_name.setText(customer.getMess_name());
                         mess_location.setText(customer.getMess_location());
                         monthlyPrice.setText(customer.getMonthlyPrice());

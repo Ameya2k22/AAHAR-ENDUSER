@@ -30,13 +30,4 @@ public class SplashScreen extends AppCompatActivity {
             }
         },4000);
     }
-
-        @Override
-    protected void onStart() {
-        super.onStart();
-        if(mAuth.getCurrentUser() != null){
-            Intent intent = new Intent(SplashScreen.this, MainActivity.class);
-            startActivity(intent);
-        }
-    }
 }
