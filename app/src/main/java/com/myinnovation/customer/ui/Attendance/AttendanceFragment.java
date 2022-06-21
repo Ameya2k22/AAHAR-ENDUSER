@@ -3,6 +3,7 @@ package com.myinnovation.customer.ui.Attendance;
 import android.os.Bundle;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -114,12 +115,16 @@ public class AttendanceFragment extends Fragment {
 
                                             }
                                         });
-                                        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
+                                        Calendar calendar = Calendar.getInstance();
+                                        String year = String.valueOf(calendar.get(Calendar.YEAR));
+                                        String month = String.valueOf(calendar.get(Calendar.MONTH));
+                                        String day = String.valueOf(calendar.get(Calendar.DATE));
                                         FirebaseDatabase.getInstance().getReference()
                                                 .child("EndUser")
                                                 .child("Attendance")
                                                 .child(FirebaseAuth.getInstance().getUid())
-                                                .child(date).setValue("Present");
+                                                .child(year).child(month).child(day).setValue("Present");
 
                                         Toast.makeText(getActivity(), "Attendance Submitted Successfully", Toast.LENGTH_SHORT).show();
                                     }
@@ -128,12 +133,16 @@ public class AttendanceFragment extends Fragment {
                                 noButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
+                                        Calendar calendar = Calendar.getInstance();
+                                        String year = String.valueOf(calendar.get(Calendar.YEAR));
+                                        String month = String.valueOf(calendar.get(Calendar.MONTH));
+                                        String day = String.valueOf(calendar.get(Calendar.DATE));
                                         FirebaseDatabase.getInstance().getReference()
                                                 .child("EndUser")
                                                 .child("Attendance")
                                                 .child(FirebaseAuth.getInstance().getUid())
-                                                .child(date).setValue("Absent");
+                                                .child(year).child(month).child(day).setValue("Absent");
                                     }
                                 });
                             }

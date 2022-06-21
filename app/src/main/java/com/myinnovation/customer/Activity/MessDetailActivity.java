@@ -76,6 +76,8 @@ public class MessDetailActivity extends AppCompatActivity {
                                         studentInfo.setDayRemaining(30);
                                         database.getReference().child("EndUser").child("Details").child(FirebaseAuth.getInstance().getUid()).setValue(user);
                                         database.getReference().child("Customer").child("Students").child(key).push().setValue(studentInfo);
+                                        String rating = "0";
+                                        database.getReference().child("Customer").child("Ratings").child(key).setValue(rating);
                                     }
                                 }
                             }
