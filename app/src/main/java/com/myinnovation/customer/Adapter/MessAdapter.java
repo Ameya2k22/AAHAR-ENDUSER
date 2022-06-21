@@ -12,9 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.myinnovation.customer.Activity.MessDetailActivity;
 import com.myinnovation.customer.Models.Customer;
-import com.myinnovation.customer.Models.MessInfo;
 import com.myinnovation.customer.R;
+import com.myinnovation.customer.databinding.SingleMessLayoutBinding;
 
 import java.util.ArrayList;
 
@@ -31,24 +32,25 @@ public class MessAdapter extends RecyclerView.Adapter<MessAdapter.VH> {
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.mess_list, parent, false);
+        View view = inflater.inflate(R.layout.single_mess_layout, parent, false);
         return new VH(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
         Customer customer = customerList.get(position);
-        holder.MessName.setText(customer.getMess_name());
-        holder.Location.setText(customer.getMess_location());
+        holder.binding.MessName.setText(customer.getMess_name());
+        holder.binding.Location.setText(customer.getMess_location());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Toast.makeText(view.getContext(), customer.getCustomer_id(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(view.getContext(), MessInfo.class);
-                intent.putExtra("Key", customer.getCustomer_id());
-                view.getContext().startActivity(intent);
-            }
+//        Picasso.get()
+//                .load(customer.getImage())
+//                .placeholder(R.drawable.aahar_logo)
+//                .into(holder.binding.image);
+
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), MessDetailActivity.class);
+            intent.putExtra("KEY", customer.getCustomer_id());
+            view.getContext().startActivity(intent);
         });
     }
 
@@ -63,15 +65,10 @@ public class MessAdapter extends RecyclerView.Adapter<MessAdapter.VH> {
     }
 
     public class VH extends RecyclerView.ViewHolder{
-        TextView MessName, Location, Email, monthlyPrice, owner_name, specialDishes;
-        ImageView image;
-        ConstraintLayout layout;
+        SingleMessLayoutBinding binding;
         public VH(@NonNull View itemView) {
             super(itemView);
-            MessName = itemView.findViewById(R.id.MessName);
-            Location = itemView.findViewById(R.id.Location);
-            image = itemView.findViewById(R.id.image);
-            layout = itemView.findViewById(R.id.layout);
+            binding = SingleMessLayoutBinding.bind(itemView);
         }
     }
 }

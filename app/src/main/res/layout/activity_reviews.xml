@@ -86,11 +86,11 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
+            android:id="@+id/my_review"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:padding="4dp"
-            android:clickable="false"
             android:fontFamily="@font/oswald"
             android:gravity="center"
             android:text="My Review"
