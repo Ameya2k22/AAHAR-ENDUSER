@@ -35,7 +35,6 @@
             android:exported="false" />
 
         <activity
-<<<<<<< HEAD
             android:name=".Activity.ReviewsActivity"
             android:exported="false" />
 
@@ -47,9 +46,8 @@
             android:name=".Activity.MainActivity"
             android:exported="false"
             android:theme="@style/Theme.Customer.NoActionBar"/>
+
         <activity
-=======
->>>>>>> d50f58546b245042bcc18f69acb7a495ed0a83e0
             android:name=".Activity.SplashScreen"
             android:exported="true"
             android:theme="@style/Theme.Customer.NoActionBar">

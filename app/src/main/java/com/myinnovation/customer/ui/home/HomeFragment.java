@@ -35,22 +35,17 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-<<<<<<< HEAD
     TextView mess_email, mess_location, mess_name, monthlyPrice, owner_name, specialDishes, mess_mobile;
     Button Join;
     FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     User user;
 
-=======
->>>>>>> d50f58546b245042bcc18f69acb7a495ed0a83e0
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
 
-<<<<<<< HEAD
         binding.complaintsAndReviews.setOnClickListener(v -> {
             startActivity(new Intent(getContext(), ReviewsActivity.class));
         });
@@ -106,9 +101,6 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
 
         return root;
-=======
-        return binding.getRoot();
->>>>>>> d50f58546b245042bcc18f69acb7a495ed0a83e0
     }
 
     @Override
