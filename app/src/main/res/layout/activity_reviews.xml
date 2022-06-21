@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.ReviewsActivity">
+    tools:context=".Activity.ReviewsActivity"
+    android:background="@drawable/ic_black_2_bg">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
@@ -27,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/oswald"
                 android:text="Mess Name"
-                android:textColor="@color/blue"
+                android:textColor="@color/dark_orange"
                 android:textSize="32sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -79,7 +80,7 @@
         app:cardElevation="20dp"
         app:cardCornerRadius="16dp"
         android:layout_margin="8dp"
-        app:cardBackgroundColor="@color/sky_blue"
+        app:cardBackgroundColor="@color/light_orange"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -94,7 +95,7 @@
             android:fontFamily="@font/oswald"
             android:gravity="center"
             android:text="My Review"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold" />
     </androidx.cardview.widget.CardView>

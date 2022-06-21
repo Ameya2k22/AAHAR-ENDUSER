@@ -62,13 +62,17 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
 
         binding.customCalendar.setMapDescToProp(descHashMap);
 
+        // Initialize date hashmap
         HashMap<Integer,Object> dateHashmap=new HashMap<>();
 
+        // initialize calendar
+        Calendar calendar=  Calendar.getInstance();
         dateHashmap.put(calendar.get(Calendar.DAY_OF_MONTH),"current");
         String year = String.valueOf(calendar.get(Calendar.YEAR));
         String month = String.valueOf(calendar.get(Calendar.MONTH));
         String day = String.valueOf(calendar.get(Calendar.DATE));
 
+        binding.presentDay.setText(String.valueOf(0));
         FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(year).child(month).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -80,6 +84,7 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                             String ans1 = snapshot2.getValue(String.class);
                             dateHashMap1.put(Integer.valueOf(ans), ans1);
                             binding.customCalendar.setDate(calendar, dateHashMap1);
+                            binding.presentDay.setText(String.valueOf(dateHashMap1.size()));
                         }
 
                         @Override
@@ -112,13 +117,13 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
         Map<Integer, Object>[] dateMap = new Map[2];
 
 //        FirebaseDatabase.getInstance().getReference().child("Customer").child("Attendance").child(FirebaseAuth.getInstance().getUid())
-        Toast.makeText(getActivity(), FirebaseAuth.getInstance().getUid().toString(), Toast.LENGTH_SHORT).show();
         Calendar calendar2 = Calendar.getInstance();
         if (Calendar.getInstance().get(Calendar.YEAR) == newMonth.get(Calendar.YEAR)) {
             switch (newMonth.get(Calendar.MONTH)) {
                 case Calendar.JANUARY:
                     dateMap[0] = new HashMap<>();
                     calendar2.set(Calendar.MONTH, Calendar.JANUARY);
+                    binding.presentDay.setText(String.valueOf(0));
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.JANUARY)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -131,7 +136,7 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                                         Object val = ans1;
                                         dateMap[0].put(Integer.valueOf(ans), val);
                                         binding.customCalendar.setDate(calendar2, dateMap[0]);
-
+                                        binding.presentDay.setText(String.valueOf(dateMap[0].size()));
                                     }
 
                                     @Override
@@ -153,6 +158,7 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                 case Calendar.FEBRUARY:
                     dateMap[0] = new HashMap<>();
                     calendar2.set(Calendar.MONTH, Calendar.FEBRUARY);
+                    binding.presentDay.setText(String.valueOf(0));
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.FEBRUARY)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -165,7 +171,7 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                                         Object val = ans1;
                                         dateMap[0].put(Integer.valueOf(ans), val);
                                         binding.customCalendar.setDate(calendar2, dateMap[0]);
-
+                                        binding.presentDay.setText(String.valueOf(dateMap[0].size()));
                                     }
 
                                     @Override
@@ -187,6 +193,7 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                 case Calendar.MARCH:
                     dateMap[0] = new HashMap<>();
                     calendar2.set(Calendar.MONTH, Calendar.MARCH);
+                    binding.presentDay.setText(String.valueOf(0));
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.MARCH)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -199,7 +206,7 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                                         Object val = ans1;
                                         dateMap[0].put(Integer.valueOf(ans), val);
                                         binding.customCalendar.setDate(calendar2, dateMap[0]);
-
+                                        binding.presentDay.setText(String.valueOf(dateMap[0].size()));
                                     }
 
                                     @Override
@@ -221,6 +228,7 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                 case Calendar.APRIL:
                     dateMap[0] = new HashMap<>();
                     calendar2.set(Calendar.MONTH, Calendar.APRIL);
+                    binding.presentDay.setText(String.valueOf(0));
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.APRIL)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -233,7 +241,7 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                                         Object val = ans1;
                                         dateMap[0].put(Integer.valueOf(ans), val);
                                         binding.customCalendar.setDate(calendar2, dateMap[0]);
-
+                                        binding.presentDay.setText(String.valueOf(dateMap[0].size()));
                                     }
 
                                     @Override
@@ -255,6 +263,7 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                 case Calendar.MAY:
                     dateMap[0] = new HashMap<>();
                     calendar2.set(Calendar.MONTH, Calendar.MAY);
+                    binding.presentDay.setText(String.valueOf(0));
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.MAY)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -267,7 +276,7 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                                         Object val = ans1;
                                         dateMap[0].put(Integer.valueOf(ans), val);
                                         binding.customCalendar.setDate(calendar2, dateMap[0]);
-
+                                        binding.presentDay.setText(String.valueOf(dateMap[0].size()));
                                     }
 
                                     @Override
@@ -289,6 +298,7 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                 case Calendar.JUNE:
                     dateMap[0] = new HashMap<>();
                     calendar2.set(Calendar.MONTH, Calendar.JUNE);
+                    binding.presentDay.setText(String.valueOf(0));
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.JUNE)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -301,7 +311,11 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                                         Object val = ans1;
                                         dateMap[0].put(Integer.valueOf(ans), val);
                                         binding.customCalendar.setDate(calendar2, dateMap[0]);
-
+                                        if(dateMap[0].size() == 0){
+                                            binding.presentDay.setText(String.valueOf(0));
+                                        } else{
+                                            binding.presentDay.setText(String.valueOf(dateMap[0].size()));
+                                        }
                                     }
 
                                     @Override
@@ -323,6 +337,7 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                 case Calendar.JULY:
                     dateMap[0] = new HashMap<>();
                     calendar2.set(Calendar.MONTH, Calendar.JULY);
+                    binding.presentDay.setText(String.valueOf(0));
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.JULY)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -335,7 +350,11 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                                         Object val = ans1;
                                         dateMap[0].put(Integer.valueOf(ans), val);
                                         binding.customCalendar.setDate(calendar2, dateMap[0]);
-
+                                        if(dateMap[0].size() == 0){
+                                            binding.presentDay.setText(String.valueOf(0));
+                                        } else{
+                                            binding.presentDay.setText(String.valueOf(dateMap[0].size()));
+                                        }
                                     }
 
                                     @Override
@@ -357,6 +376,7 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                 case Calendar.AUGUST:
                     dateMap[0] = new HashMap<>();
                     calendar2.set(Calendar.MONTH, Calendar.AUGUST);
+                    binding.presentDay.setText(String.valueOf(0));
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.AUGUST)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -369,7 +389,8 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                                         Object val = ans1;
                                         dateMap[0].put(Integer.valueOf(ans), val);
                                         binding.customCalendar.setDate(calendar2, dateMap[0]);
-
+                                        Toast.makeText(getActivity(), String.valueOf(dateMap[0].size()), Toast.LENGTH_LONG).show();
+                                        binding.presentDay.setText(String.valueOf(dateMap[0].size()));
                                     }
 
                                     @Override
@@ -391,6 +412,7 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                 case Calendar.SEPTEMBER:
                     dateMap[0] = new HashMap<>();
                     calendar2.set(Calendar.MONTH, Calendar.SEPTEMBER);
+                    binding.presentDay.setText(String.valueOf(0));
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.SEPTEMBER)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -403,7 +425,7 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                                         Object val = ans1;
                                         dateMap[0].put(Integer.valueOf(ans), val);
                                         binding.customCalendar.setDate(calendar2, dateMap[0]);
-
+                                        binding.presentDay.setText(String.valueOf(dateMap[0].size()));
                                     }
 
                                     @Override
@@ -425,6 +447,7 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                 case Calendar.OCTOBER:
                     dateMap[0] = new HashMap<>();
                     calendar2.set(Calendar.MONTH, Calendar.OCTOBER);
+                    binding.presentDay.setText(String.valueOf(0));
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.OCTOBER)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -437,7 +460,7 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                                         Object val = ans1;
                                         dateMap[0].put(Integer.valueOf(ans), val);
                                         binding.customCalendar.setDate(calendar2, dateMap[0]);
-
+                                        binding.presentDay.setText(String.valueOf(dateMap[0].size()));
                                     }
 
                                     @Override
@@ -459,6 +482,7 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                 case Calendar.NOVEMBER:
                     dateMap[0] = new HashMap<>();
                     calendar2.set(Calendar.MONTH, Calendar.NOVEMBER);
+                    binding.presentDay.setText(String.valueOf(0));
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.NOVEMBER)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -471,7 +495,7 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                                         Object val = ans1;
                                         dateMap[0].put(Integer.valueOf(ans), val);
                                         binding.customCalendar.setDate(calendar2, dateMap[0]);
-
+                                        binding.presentDay.setText(String.valueOf(dateMap[0].size()));
                                     }
 
                                     @Override
@@ -493,6 +517,7 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                 case Calendar.DECEMBER:
                     dateMap[0] = new HashMap<>();
                     calendar2.set(Calendar.MONTH, Calendar.DECEMBER);
+                    binding.presentDay.setText(String.valueOf(0));
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.DECEMBER)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -505,7 +530,7 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                                         Object val = ans1;
                                         dateMap[0].put(Integer.valueOf(ans), val);
                                         binding.customCalendar.setDate(calendar2, dateMap[0]);
-
+                                        binding.presentDay.setText(String.valueOf(dateMap[0].size()));
                                     }
 
                                     @Override
@@ -531,8 +556,6 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
             }
 
 
-        } else {
-            Toast.makeText(getContext(), "Yet to come/ Already passed", Toast.LENGTH_LONG).show();
         }
 
         return dateMap;

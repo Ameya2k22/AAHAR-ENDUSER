@@ -4,9 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/curve_bg_2"
+    android:background="@drawable/ic_head_inv_2_bg"
     tools:context=".Activity.RatingActivity">
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="136dp"
+        android:numStars="5"
+        android:clickable="false"
+        android:progressBackgroundTint="@color/white"
+        android:progressTint="@color/green"
+        android:rating="3.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/attendanceDay"
+        tools:ignore="SpeakableTextPresentCheck" />
+=======
+>>>>>>> a358eb1a2f4b8b4f30bd724259c4d8baf5563e2c
+>>>>>>> origin
     <TextView
         android:id="@+id/attendanceDay"
         android:layout_width="wrap_content"
@@ -14,7 +36,15 @@
         android:layout_marginTop="60dp"
         android:fontFamily="@font/oswald"
         android:text="@string/overall_rating"
+<<<<<<< HEAD
         android:textColor="@color/blue"
+=======
+<<<<<<< HEAD
+        android:textColor="@color/dark_orange"
+=======
+        android:textColor="@color/green"
+>>>>>>> a358eb1a2f4b8b4f30bd724259c4d8baf5563e2c
+>>>>>>> origin
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,13 +70,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
             <LinearLayout
                 android:id="@+id/linearLayout4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="25dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +95,6 @@
                     android:text="Enjoying"
                     android:textColor="@color/black"
                     android:textSize="28sp"
-                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -77,9 +107,8 @@
                     android:fontFamily="@font/oswald"
                     android:gravity="center"
                     android:text="Aster Mess"
-                    android:textColor="@color/sky_blue"
+                    android:textColor="@color/dark_orange"
                     android:textSize="28sp"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/Location"
                     app:layout_constraintStart_toEndOf="@+id/Location"
                     app:layout_constraintTop_toTopOf="@+id/Location" />
@@ -131,7 +160,7 @@
                 android:clickable="false"
                 android:numStars="5"
                 android:progressBackgroundTint="@color/black"
-                android:progressTint="@color/light_orange"
+                android:progressTint="@color/dark_orange"
                 android:rating="3.5"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -148,14 +177,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="140dp"
+<<<<<<< HEAD
         android:background="@drawable/rounded_box"
         android:clickable="false"
+=======
+<<<<<<< HEAD
+        android:background="@color/light_orange"
+=======
+        android:background="@drawable/rounded_box"
+        android:clickable="false"
+>>>>>>> a358eb1a2f4b8b4f30bd724259c4d8baf5563e2c
+>>>>>>> origin
         android:fontFamily="@font/oswald"
         android:padding="16dp"
         android:text="@string/edit_rating"
-        android:textColor="#0D47A1"
+        android:textColor="@color/white"
         android:textSize="20sp"
+<<<<<<< HEAD
         android:textStyle="bold"
+=======
+<<<<<<< HEAD
+        android:clickable="false"
+=======
+        android:textStyle="bold"
+>>>>>>> a358eb1a2f4b8b4f30bd724259c4d8baf5563e2c
+>>>>>>> origin
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
