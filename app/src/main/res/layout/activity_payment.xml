@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/curve_bg_2"
+    android:background="@drawable/ic_sign_curve_bg"
     tools:context=".Activity.PaymentActivity">
 
     <TextView
@@ -13,9 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:background="@drawable/text_box"
-        android:backgroundTint="@color/green"
+        android:backgroundTint="@color/white"
         android:text="Use Razor Pay"
-        android:textColor="@color/white"
+        android:textColor="@color/dark_orange"
         android:textColorHint="@color/white"
         android:textSize="28sp"
         android:textStyle="bold"
@@ -112,7 +112,7 @@
         android:id="@+id/upi_payment_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="80dp"
         android:orientation="vertical"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -134,7 +134,7 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold" />
+           />
 
         <TextView
             android:id="@+id/upi_id"
@@ -150,7 +150,7 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            />
 
         <TextView
             android:id="@+id/name"
@@ -167,7 +167,7 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold" />
+           />
 
         <EditText
             android:id="@+id/note"
@@ -182,23 +182,23 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold" />
+           />
 
         <Button
             android:id="@+id/send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="50dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/rounded_box"
+            android:background="@color/dark_orange"
             android:fontFamily="@font/oswald"
             android:gravity="center"
             android:text="send by upi"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold" />
+           />
 
     </LinearLayout>
 

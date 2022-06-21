@@ -45,6 +45,7 @@
     <string name="team_ameya_s_project">Team Ameya\'s Project</string>
     <string name="food_quote">दीपो भक्षयते ध्वान्तं</string>
     <string name="notifications">Notifications</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="no_account">Don\'t have an account? Sign Up</string>
@@ -52,11 +53,21 @@
     <string name="sign_in_to_enter">Sign in to Enter</string>
     <string name="welcome_user">Welcome User</string>
     <string name="join">Join</string>
-    <string name="complaints_and_reviews">Complaints and Reviews</string>
     <string name="ratings">Ratings</string>
     <string name="price_per_month">Price per month :</string>
     <string name="edit_rating">Edit Rating</string>
+<<<<<<< HEAD
+    <string name="overall_rating">Overall Rating</string>
+    <string name="congratulations_payment_is_successfully_done">Congratulations Payment is successfully done</string>
+=======
+<<<<<<< HEAD
+    <string name="overall_rating">Orange Rating</string>
+    <string name="congratulations_payment_is_successfully_done">Congratulations Payment is successfully done</string>
+
+=======
     <string name="overall_rating">Overall Rating</string>
     <string name="congratulations_payment_is_successfully_done">Congratulations Payment is successfully done</string>
     <string name="total_present_day_in_this_month">Total Present Day in this Month</string>
+>>>>>>> a358eb1a2f4b8b4f30bd724259c4d8baf5563e2c
+>>>>>>> origin
 </resources>

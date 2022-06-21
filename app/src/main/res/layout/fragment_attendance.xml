@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/curve_bg_2"
+    android:background="@drawable/ic_orange_bg"
     tools:context=".ui.Attendance.AttendanceFragment">
 
     <androidx.cardview.widget.CardView
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:cardCornerRadius="16dp"
         app:cardElevation="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,13 +23,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_black_2_bg"
+            android:paddingBottom="25dp">
 
             <View
                 android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:background="@drawable/drawable_bottom"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +42,7 @@
                 android:layout_height="200dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
-                android:background="@drawable/rounded_box"
+                android:background="@drawable/ic_black_2_bg"
                 app:layout_constraintBottom_toBottomOf="@+id/view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +52,7 @@
                 android:id="@+id/mess_logo"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="12dp"
                 android:src="@drawable/aahar_logo"
                 app:layout_constraintBottom_toBottomOf="@+id/view2"
                 app:layout_constraintStart_toStartOf="@+id/view2"
@@ -64,9 +65,8 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/oswald"
                 android:text="Sunday"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="24sp"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/view2"
                 app:layout_constraintHorizontal_bias="0.468"
                 app:layout_constraintStart_toEndOf="@+id/mess_logo"
@@ -78,9 +78,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/oswald"
                 android:text="19/06/2022"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/attendance_day"
                 app:layout_constraintStart_toStartOf="@+id/attendance_day"
                 app:layout_constraintTop_toBottomOf="@+id/attendance_day" />
@@ -92,7 +91,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/oswald"
                 android:text="Today's Attendance"
-                android:textColor="@color/green"
+                android:textColor="@color/dark_orange"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/view2"
@@ -110,9 +109,8 @@
                 android:inputType="textMultiLine"
                 android:minHeight="48dp"
                 android:text="Are you coming for eat today?"
-                android:textColor="@color/sky_blue"
+                android:textColor="@color/white"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/view2"
                 app:layout_constraintEnd_toEndOf="@+id/view2"
                 app:layout_constraintStart_toEndOf="@+id/mess_logo"
@@ -123,16 +121,16 @@
                 android:id="@+id/no"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="32dp"
-                android:background="@drawable/drawable_bottom"
+                android:layout_marginLeft="140dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginRight="50dp"
+                android:background="@color/light_orange"
                 android:fontFamily="@font/oswald"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="5dp"
                 android:text="No"
                 android:textColor="@color/white"
-                android:textSize="24sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -143,17 +141,16 @@
                 android:id="@+id/yes"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="18dp"
                 android:layout_marginRight="32dp"
-                android:background="@drawable/drawable_bottom"
+                android:background="@color/light_orange"
                 android:fontFamily="@font/oswald"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="5dp"
                 android:text="Yes"
                 android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/no"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -169,7 +166,6 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="4dp"
                 android:layout_marginRight="4dp"
-                android:background="@color/grey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -183,7 +179,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="16dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:cardCornerRadius="16dp"
         app:cardElevation="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -194,13 +190,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_black_2_bg">
 
             <View
                 android:id="@+id/view10"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:background="@drawable/drawable_bottom"
+                android:background="@drawable/ic_orange_bg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -215,20 +212,28 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="32dp"
-                android:background="@drawable/rounded_box"
+                android:background="@drawable/ic_orange_bg"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/userProfileImage" />
 
             <TextView
-                android:id="@+id/attendanceDay"
+<<<<<<< HEAD
+                android:id="@+id/attendanceDay2"
+=======
+                android:id="@+id/username"
+>>>>>>> origin
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:fontFamily="@font/oswald"
-                android:text="Sunday"
+<<<<<<< HEAD
+                android:text=""
                 android:textColor="@color/black"
+=======
+                android:text="Mahesh Pimpale"
+                android:textColor="@color/red"
+>>>>>>> origin
                 android:textSize="28sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/view11"
@@ -236,19 +241,36 @@
                 app:layout_constraintTop_toTopOf="@+id/view11" />
 
             <TextView
-                android:id="@+id/attendanceDate"
+<<<<<<< HEAD
+                android:id="@+id/attendanceDate2"
+=======
+                android:id="@+id/attendanceDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="80dp"
                 android:fontFamily="@font/oswald"
-                android:text="19/06/2022"
+                android:text="Sunday"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                app:layout_constraintEnd_toEndOf="@+id/view11"
+                app:layout_constraintStart_toStartOf="@+id/view11"
+                app:layout_constraintTop_toBottomOf="@+id/username" />
+
+            <TextView
+                android:id="@+id/attendanceDate"
+>>>>>>> origin
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/oswald"
+<<<<<<< HEAD
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="28sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/attendanceDay"
+                app:layout_constraintEnd_toEndOf="@+id/attendanceDay2"
                 app:layout_constraintHorizontal_bias="0.509"
-                app:layout_constraintStart_toStartOf="@+id/attendanceDay"
-                app:layout_constraintTop_toBottomOf="@+id/attendanceDay" />
+                app:layout_constraintStart_toStartOf="@+id/attendanceDay2"
+                app:layout_constraintTop_toBottomOf="@+id/attendanceDay2" />
 
             <TextView
                 android:id="@+id/username"
@@ -256,39 +278,44 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="48dp"
                 android:fontFamily="@font/oswald"
-                android:text="Mahesh Pimpale"
+                android:text=""
                 android:textColor="@color/red"
                 android:textSize="28sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/view11"
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="@+id/view11"
-                app:layout_constraintTop_toBottomOf="@+id/attendanceDate" />
+                app:layout_constraintTop_toBottomOf="@+id/attendanceDate2" />
+=======
+                android:text="19/06/2022"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                app:layout_constraintEnd_toEndOf="@+id/attendanceDay"
+                app:layout_constraintStart_toStartOf="@+id/attendanceDay"
+                app:layout_constraintTop_toBottomOf="@+id/attendanceDay" />
+
+>>>>>>> origin
 
             <TextView
                 android:id="@+id/days_remaining"
-                android:layout_width="0dp"
+                android:layout_width="69dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="16dp"
                 android:fontFamily="@font/oswald"
                 android:gravity="center"
                 android:inputType="textMultiLine"
                 android:minHeight="48dp"
-                android:text="25"
+                android:text=""
                 android:textColor="@color/dark_red"
                 android:textSize="32sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/textView10"
-                app:layout_constraintEnd_toEndOf="@+id/view11"
-                app:layout_constraintStart_toEndOf="@+id/textView10"
-                app:layout_constraintTop_toTopOf="@+id/textView10" />
-
+                app:layout_constraintEnd_toEndOf="@+id/textView10"
+                app:layout_constraintStart_toStartOf="@+id/textView10"
+                app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/userProfileImage"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:src="@drawable/profile"
                 app:layout_constraintBottom_toBottomOf="@+id/view10"
                 app:layout_constraintEnd_toEndOf="@+id/view10"
@@ -299,16 +326,13 @@
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="70dp"
                 android:text="Days Remaining"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/view11"
-                app:layout_constraintStart_toStartOf="@+id/view11"
-                app:layout_constraintTop_toBottomOf="@+id/username"
-                app:layout_constraintVertical_bias="0.306" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/attendanceDate" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

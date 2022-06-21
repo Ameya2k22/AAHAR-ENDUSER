@@ -103,6 +103,12 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        Toast.makeText(getActivity(), FirebaseAuth.getInstance().getUid(), Toast.LENGTH_SHORT).show();
+//    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
