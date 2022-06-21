@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.myinnovation.customer">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/aahar_logo"
@@ -31,15 +33,28 @@
             android:exported="false" />
 
         <activity
-            android:name=".Activity.PaymentActivity"
+            android:name=".Activity.MainActivity"
             android:exported="false" />
 
         <activity
+            android:name=".Activity.ReviewsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Activity.RatingActivity"
+            android:exported="false" />
+
+        <activity
+<<<<<<< HEAD
+            android:name=".Activity.PaymentActivity"
+=======
             android:name=".Activity.MainActivity"
-            android:exported="true"
+            android:exported="false"
             android:theme="@style/Theme.Customer.NoActionBar"/>
+
         <activity
             android:name=".Activity.SplashScreen"
+>>>>>>> ae1dea06248f9c564f26ffebc05d37f2ec709979
             android:exported="true"
             android:theme="@style/Theme.Customer.NoActionBar">
             <intent-filter>

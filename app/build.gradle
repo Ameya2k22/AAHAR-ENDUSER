@@ -56,4 +56,5 @@ dependencies {
     implementation 'org.naishadhparmar.zcustomcalendar:zcustomcalendar:1.0.1'
 
     implementation 'com.razorpay:checkout:1.6.19'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

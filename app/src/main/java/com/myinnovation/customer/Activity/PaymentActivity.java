@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,8 +26,10 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
 
     ActivityPaymentBinding binding;
     final int UPI_PAYMENT = 0;
-    private int amount = 2500;
+    private int amount = 1;
     private String upiId = "", name = "";
+    private String Mess_Owner_Mobile_number = "";
+    private String Mess_Owner_Email = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,11 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         binding.send.setOnClickListener(view -> {
             String amount = binding.amountEt.getText().toString();
             String note = binding.note.getText().toString();
-            payUsingUpi(amount, upiId, name, note);
+            if(amount.equals("") || amount.isEmpty() || note.equals("") || note.isEmpty() || binding.name.equals("") || binding.upiId.equals("")){
+                Toast.makeText(PaymentActivity.this, "Fields cannot be empty.", Toast.LENGTH_LONG).show();
+            } else{
+                payUsingUpi(amount, binding.upiId.getText().toString(), binding.name.getText().toString(), note);
+            }
         });
     }
 
@@ -124,18 +131,24 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             }
 
             if (status.equals("success")) {
-                //Code to handle successful transaction here.
                 Toast.makeText(PaymentActivity.this, "Transaction successful.", Toast.LENGTH_SHORT).show();
-                Log.d("UPI", "responseStr: "+approvalRefNo);
+                binding.amountEt.setText("");
+                binding.note.setText("");
             }
             else if("Payment cancelled by user.".equals(paymentCancel)) {
                 Toast.makeText(PaymentActivity.this, "Payment cancelled by user.", Toast.LENGTH_SHORT).show();
+                binding.amountEt.setText("");
+                binding.note.setText("");
             }
             else {
                 Toast.makeText(PaymentActivity.this, "Transaction failed.Please try again", Toast.LENGTH_SHORT).show();
+                binding.amountEt.setText("");
+                binding.note.setText("");
             }
         } else {
             Toast.makeText(PaymentActivity.this, "Internet connection is not available. Please check and try again", Toast.LENGTH_SHORT).show();
+            binding.amountEt.setText("");
+            binding.note.setText("");
         }
     }
 
@@ -155,9 +168,12 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
 
     private void makepayment()
     {
-
+//        if(amount == 0 || Mess_Owner_Mobile_number.isEmpty() || Mess_Owner_Email.isEmpty() || Mess_Owner_Email.equals("") || Mess_Owner_Mobile_number.equals("")){
+//            Toast.makeText(this, "Empty Fields", Toast.LENGTH_LONG).show();
+//            return;
+//        }
         Checkout checkout = new Checkout();
-        checkout.setKeyID("<KEY>");
+        checkout.setKeyID("rzp_test_YogxmByRqeM0xU");
 
         checkout.setImage(R.drawable.aahar_logo);
         final Activity activity = this;
@@ -172,8 +188,11 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             options.put("theme.color", "#3399cc");
             options.put("currency", "INR");
             options.put("amount", amount*100);//300 X 100
-            options.put("prefill.email", "email@example.com");
-            options.put("prefill.contact","9456832170");
+//            options.put("prefill.email", Mess_Owner_Email);
+//            options.put("prefill.contact","+91" + Mess_Owner_Mobile_number);
+
+            options.put("prefill.email", "maheshpimple2002@gmail.com");
+            options.put("prefill.contact","+91" + "9653652759");
             checkout.open(activity, options);
         } catch(Exception e) {
             Log.e("TAG", "Error in starting Razorpay Checkout", e);
@@ -182,12 +201,18 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
 
     @Override
     public void onPaymentSuccess(String s) {
-        startActivity(new Intent(this, PaymentSuccessfullActivity.class).putExtra("PAYMENTID", s));
+        Toast.makeText(this, "Payment is successful", Toast.LENGTH_LONG).show();
+        binding.paymentSuccessfulLinearLayout.setVisibility(View.VISIBLE);
+        binding.paymentId.setText(s);
+        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+        binding.upiPaymentLinearLayout.setVisibility(View.GONE);
     }
 
     @Override
     public void onPaymentError(int i, String s) {
-
+        Toast.makeText(this, "Payment unsuccessful", Toast.LENGTH_SHORT).show();
+        binding.upiPaymentLinearLayout.setVisibility(View.VISIBLE);
+        binding.paymentSuccessfulLinearLayout.setVisibility(View.GONE);
     }
 
 }
