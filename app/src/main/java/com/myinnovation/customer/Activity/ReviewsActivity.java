@@ -3,6 +3,7 @@ package com.myinnovation.customer.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,20 +30,25 @@ public class ReviewsActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(FirebaseAuth.getInstance().getUid()).child("mess_id").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String id = snapshot.getValue(String.class);
+                if(snapshot.exists()){
+                    String id = snapshot.getValue(String.class);
 
-                FirebaseDatabase.getInstance().getReference().child("Customer").child("Mess-Info").child(id).child("mess_name").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String name = snapshot.getValue(String.class);
-                         mess_name.setText(name);
-                    }
+                    FirebaseDatabase.getInstance().getReference().child("Customer").child("Mess-Info").child(id).child("mess_name").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String name = snapshot.getValue(String.class);
+                            mess_name.setText(name);
+                        }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
+                        }
+                    });
+                } else{
+                    Toast.makeText(getApplicationContext(), "This mess has no Reviews yet!!!", Toast.LENGTH_LONG).show();
+                }
+
             }
 
             @Override

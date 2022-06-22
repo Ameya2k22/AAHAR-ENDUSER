@@ -63,13 +63,16 @@ public class ExploreFragment extends Fragment {
         database.getReference().child("Customer").child("Mess-Info").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                    Customer customerInfo = snapshot1.getValue(Customer.class);
-                    assert customerInfo != null;
-                    customerInfo.setCustomer_id(snapshot1.getKey());
-                    customers.add(customerInfo);
+                if(snapshot.exists()){
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                        Customer customerInfo = snapshot1.getValue(Customer.class);
+                        assert customerInfo != null;
+                        customerInfo.setCustomer_id(snapshot1.getKey());
+                        customers.add(customerInfo);
+                    }
+                    messAdapter.notifyDataSetChanged();
                 }
-                messAdapter.notifyDataSetChanged();
+
             }
 
             @Override

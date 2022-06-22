@@ -38,64 +38,72 @@ public class RatingActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).child("mess_id").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String id = snapshot.getValue(String.class);
+                if(snapshot.exists()){
+                    String id = snapshot.getValue(String.class);
+                    FirebaseDatabase.getInstance().getReference().child("Customer").child("Ratings").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists()){
+                                String rating1 = snapshot.getValue(String.class);
+                                assert rating1 != null;
+                                binding.ratingBar.setRating(Float.parseFloat(rating1));
 
-                assert id != null;
-                FirebaseDatabase.getInstance().getReference().child("Customer").child("Ratings").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String rating1 = snapshot.getValue(String.class);
-                        assert rating1 != null;
-                        binding.ratingBar.setRating(Float.parseFloat(rating1));
+                                messRatingValue = binding.ratingBar.getRating();
 
-                        messRatingValue = binding.ratingBar.getRating();
+                                binding.editRatingBtn.setOnClickListener(v -> {
+                                    ratingValue = binding.ratingBar.getRating();
 
-                        binding.editRatingBtn.setOnClickListener(v -> {
-                            ratingValue = binding.ratingBar.getRating();
+                                    // now take average of messRatingValue and ratingValue
+                                    float avg_rating = (messRatingValue + ratingValue)/2.0f;
 
-                            // now take average of messRatingValue and ratingValue
-                            float avg_rating = (messRatingValue + ratingValue)/2.0f;
+                                    if(avg_rating > 5.0){
+                                        avg_rating = 5.0F;
+                                    }
+                                    String rating = String.valueOf(avg_rating);
 
-                            if(avg_rating > 5.0){
-                                avg_rating = 5.0F;
-                            }
-                            String rating = String.valueOf(avg_rating);
+                                    // store this value in the mess database.
+                                    FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(FirebaseAuth.getInstance().getUid()).child("mess_id").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            String id = snapshot.getValue(String.class);
 
-                            // store this value in the mess database.
-                            FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(FirebaseAuth.getInstance().getUid()).child("mess_id").addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    String id = snapshot.getValue(String.class);
+                                            assert id != null;
+                                            FirebaseDatabase.getInstance().getReference().child("Customer").child("Ratings").child(id).setValue(rating).addOnCompleteListener(task -> {
+                                                if(task.isSuccessful()){
+                                                    Toast.makeText(RatingActivity.this, "Rating Updated Successfully", Toast.LENGTH_SHORT).show();
+                                                    Notification notification = new Notification();
+                                                    notification.setNotificationType("Rating");
+                                                    notification.setNotificationBy(FirebaseAuth.getInstance().getUid());
 
-                                    assert id != null;
-                                    FirebaseDatabase.getInstance().getReference().child("Customer").child("Ratings").child(id).setValue(rating).addOnCompleteListener(task -> {
-                                        if(task.isSuccessful()){
-                                            Toast.makeText(RatingActivity.this, "Rating Updated Successfully", Toast.LENGTH_SHORT).show();
-                                            Notification notification = new Notification();
-                                            notification.setNotificationType("Rating");
-                                            notification.setNotificationBy(FirebaseAuth.getInstance().getUid());
+                                                    FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(id).setValue(notification).addOnCompleteListener(task1 -> {
 
-                                            FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(id).setValue(notification).addOnCompleteListener(task1 -> {
-
+                                                    });
+                                                }
                                             });
                                         }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
                                     });
-                                }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
+                                });
+                            }
+                            else{
+                                Toast.makeText(RatingActivity.this, "This mess is not rated yet!!!", Toast.LENGTH_LONG).show();
+                            }
+                        }
 
-                                }
-                            });
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                        });
-                    }
+                        }
+                    });
+                } else{
+                    Toast.makeText(RatingActivity.this, "This mess is not rated yet!!!", Toast.LENGTH_LONG).show();
+                }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
             }
 
             @Override
