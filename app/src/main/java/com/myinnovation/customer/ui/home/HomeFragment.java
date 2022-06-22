@@ -15,6 +15,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.myinnovation.customer.Activity.PaymentActivity;
 import com.myinnovation.customer.Activity.RatingActivity;
 import com.myinnovation.customer.Activity.ReviewsActivity;
 import com.myinnovation.customer.Models.Customer;
@@ -33,9 +34,11 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-
+        FirebaseThread thread = new FirebaseThread();
+        thread.start();
         binding.complaintsAndReviews.setOnClickListener(v -> startActivity(new Intent(getContext(), ReviewsActivity.class)));
 
+        binding.PayAmount.setOnClickListener(v -> startActivity(new Intent(getContext(), PaymentActivity.class)));
         binding.ratings.setOnClickListener(v -> startActivity(new Intent(getContext(), RatingActivity.class)));
 
         mess_email = binding.messEmail;
@@ -46,43 +49,54 @@ public class HomeFragment extends Fragment {
         monthlyPrice = binding.monthlyPrice;
         specialDishes = binding.specialDishes;
 
-        FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).child("mess_id").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String id = snapshot.getValue(String.class);
-                database.getReference().child("Customer").child("Mess-Info").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot snapshot1 : snapshot.getChildren()){
-                            if(Objects.requireNonNull(snapshot1.getKey()).equals(id)){
-                                Customer customer = snapshot1.getValue(Customer.class);
-                                assert customer != null;
-                                mess_email.setText(customer.getMess_email());
-                                mess_name.setText(customer.getMess_name());
-                                mess_mobile.setText(customer.getPhone_no());
-                                mess_location.setText(customer.getMess_location());
-                                monthlyPrice.setText(customer.getMonthlyPrice());
-                                owner_name.setText(customer.getOwner_name());
-                                specialDishes.setText(customer.getSpecialDishes());
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
 
         return binding.getRoot();
+    }
+
+    private class FirebaseThread extends Thread{
+
+        @Override
+        public void run() {
+            FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).child("mess_id").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()){
+                        String id = snapshot.getValue(String.class);
+                        database.getReference().child("Customer").child("Mess-Info").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if(snapshot.exists()){
+                                    for(DataSnapshot snapshot1 : snapshot.getChildren()){
+                                        if(Objects.requireNonNull(snapshot1.getKey()).equals(id)){
+                                            Customer customer = snapshot1.getValue(Customer.class);
+                                            assert customer != null;
+                                            mess_email.setText(customer.getMess_email());
+                                            mess_name.setText(customer.getMess_name());
+                                            mess_mobile.setText(customer.getPhone_no());
+                                            mess_location.setText(customer.getMess_location());
+                                            monthlyPrice.setText(customer.getMonthlyPrice());
+                                            owner_name.setText(customer.getOwner_name());
+                                            specialDishes.setText(customer.getSpecialDishes());
+                                        }
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
     }
 
     @Override

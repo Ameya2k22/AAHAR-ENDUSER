@@ -65,9 +65,10 @@ public class AttendanceFragment extends Fragment {
         FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
                     User user = snapshot.getValue(User.class);
-                assert user != null;
-                String id = user.getMess_id();
+                    assert user != null;
+                    String id = user.getMess_id();
 
                     FirebaseDatabase.getInstance().getReference().child("Customer").child("Attendance").child(id).child("SessionOn").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -87,37 +88,42 @@ public class AttendanceFragment extends Fragment {
                                                 .child("mess_id").addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot snapshot12) {
-                                                String mess_id = snapshot12.getValue(String.class);
-                                                assert mess_id != null;
-                                                FirebaseDatabase.getInstance().getReference()
-                                                        .child("Customer")
-                                                        .child("Students")
-                                                        .child(mess_id)
-                                                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                                                            @Override
-                                                            public void onDataChange(@NonNull DataSnapshot snapshot12) {
-                                                                for(DataSnapshot snapshot2: snapshot12.getChildren()){
-                                                                    StudentInfo studentInfo = snapshot2.getValue(StudentInfo.class);
-                                                                    assert studentInfo != null;
-                                                                    if(studentInfo.getStudentID().equals(FirebaseAuth.getInstance().getUid())){
-                                                                        long day = studentInfo.getDayRemaining();
-                                                                        day = day-1;
-                                                                        studentInfo.setDayRemaining(day);
-                                                                        FirebaseDatabase.getInstance().getReference()
-                                                                                .child("Customer")
-                                                                                .child("Students")
-                                                                                .child(mess_id)
-                                                                                .child(Objects.requireNonNull(snapshot2.getKey()))
-                                                                                .setValue(studentInfo);
+                                                if(snapshot12.exists()){
+                                                    String mess_id = snapshot12.getValue(String.class);
+                                                    assert mess_id != null;
+                                                    FirebaseDatabase.getInstance().getReference()
+                                                            .child("Customer")
+                                                            .child("Students")
+                                                            .child(mess_id)
+                                                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot12) {
+                                                                    if(snapshot12.exists()){
+                                                                        for(DataSnapshot snapshot2: snapshot12.getChildren()){
+                                                                            StudentInfo studentInfo = snapshot2.getValue(StudentInfo.class);
+                                                                            assert studentInfo != null;
+                                                                            if(studentInfo.getStudentID().equals(FirebaseAuth.getInstance().getUid())){
+                                                                                long day = studentInfo.getDayRemaining();
+                                                                                day = day-1;
+                                                                                studentInfo.setDayRemaining(day);
+                                                                                FirebaseDatabase.getInstance().getReference()
+                                                                                        .child("Customer")
+                                                                                        .child("Students")
+                                                                                        .child(mess_id)
+                                                                                        .child(Objects.requireNonNull(snapshot2.getKey()))
+                                                                                        .setValue(studentInfo);
+                                                                            }
+                                                                        }
                                                                     }
+
                                                                 }
-                                                            }
 
-                                                            @Override
-                                                            public void onCancelled(@NonNull DatabaseError error) {
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
 
-                                                            }
-                                                        });
+                                                                }
+                                                            });
+                                                }
                                             }
 
                                             @Override
@@ -166,22 +172,24 @@ public class AttendanceFragment extends Fragment {
                                     @RequiresApi(api = Build.VERSION_CODES.O)
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot4) {
-                                        for(DataSnapshot snapshot1:snapshot4.getChildren()){
-                                            StudentInfo studentInfo = snapshot1.getValue(StudentInfo.class);
-                                            assert studentInfo != null;
-                                            binding.daysRemaining.setText(String.valueOf(studentInfo.getDayRemaining()-1));
-                                            FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(studentInfo.getStudentID()).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                    String name1 = snapshot.getValue(String.class);
-                                                    binding.username.setText(name1);
-                                                }
+                                        if(snapshot4.exists()){
+                                            for(DataSnapshot snapshot1:snapshot4.getChildren()){
+                                                StudentInfo studentInfo = snapshot1.getValue(StudentInfo.class);
+                                                assert studentInfo != null;
+                                                binding.daysRemaining.setText(String.valueOf(studentInfo.getDayRemaining()-1));
+                                                FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(studentInfo.getStudentID()).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        String name1 = snapshot.getValue(String.class);
+                                                        binding.username.setText(name1);
+                                                    }
 
-                                                @Override
-                                                public void onCancelled(@NonNull DatabaseError error) {
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
 
-                                                }
-                                            });
+                                                    }
+                                                });
+                                            }
                                         }
                                     }
 
@@ -193,7 +201,7 @@ public class AttendanceFragment extends Fragment {
 
                             }
                             else{
-                                Toast.makeText(getActivity(), "You aren't joined to any mess", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "You aren't joined to any mess yet", Toast.LENGTH_LONG).show();
                             }
                         }
 
@@ -202,6 +210,12 @@ public class AttendanceFragment extends Fragment {
 
                         }
                     });
+                } else{
+                    Toast.makeText(getActivity(), "You aren't joined to any mess yet",Toast.LENGTH_LONG).show();
+                    binding.AttendanceCardView.setVisibility(View.INVISIBLE);
+                    binding.AttendanceVerificationCardview.setVisibility(View.INVISIBLE);
+                }
+
             }
 
             @Override

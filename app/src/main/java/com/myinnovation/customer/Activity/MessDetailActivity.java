@@ -92,7 +92,13 @@ public class MessDetailActivity extends AppCompatActivity {
                                 Notification notification = new Notification();
                                 notification.setNotificationType("Joined");
                                 notification.setNotificationBy(FirebaseAuth.getInstance().getUid());
+<<<<<<< HEAD
                                 FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(key).push().setValue(notification);
+=======
+                                FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(key).setValue(notification).addOnCompleteListener(task -> {
+                                    startActivity(new Intent(MessDetailActivity.this, MainActivity.class));
+                                });
+>>>>>>> origin
                             }
                         }
                     }

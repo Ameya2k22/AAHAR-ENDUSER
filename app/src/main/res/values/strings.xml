@@ -56,8 +56,13 @@
     <string name="ratings">Ratings</string>
     <string name="price_per_month">Price per month :</string>
     <string name="edit_rating">Edit Rating</string>
+<<<<<<< HEAD
     <string name="overall_rating">Overall Rating</string>
     <string name="congratulations_payment_is_successfully_done">Congratulations Payment is successfully done</string>
+=======
+    <string name="congratulations_payment_is_successfully_done">Congratulations Payment is successfully done</string>
+    <string name="overall_rating">Overall Rating</string>
+>>>>>>> origin
     <string name="total_present_day_in_this_month">Total Present Day in this Month</string>
     <string name="or">OR</string>
     <string name="sign_in_with_google">Sign in with Google</string>
@@ -89,4 +94,6 @@
     <string name="enter_note">Enter Note</string>
     <string name="send_by_upi">send by upi</string>
     <string name="payment_successfull">payment successfull</string>
+    <string name="logout">Logout</string>
+    <string name="after_clicking_logout_you_will_be_redirected_to_sign_up_page">After clicking logout you will be redirected to Sign Up page</string>
 </resources>

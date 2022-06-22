@@ -36,7 +36,8 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentCalendarBinding.inflate(inflater, container, false);
-
+        FirebaseThread thread = new FirebaseThread();
+        thread.start();
         binding.customCalendar.setOnNavigationButtonClickedListener(CustomCalendar.PREVIOUS, this);
         binding.customCalendar.setOnNavigationButtonClickedListener(CustomCalendar.NEXT, this);
 
@@ -56,46 +57,6 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
         descHashMap.put("Present", presentProperty);
 
         binding.customCalendar.setMapDescToProp(descHashMap);
-
-        // Initialize date hashmap
-        HashMap<Integer,Object> dateHashmap=new HashMap<>();
-
-        // initialize calendar
-        Calendar calendar=  Calendar.getInstance();
-        dateHashmap.put(calendar.get(Calendar.DAY_OF_MONTH),"current");
-        String year = String.valueOf(calendar.get(Calendar.YEAR));
-        String month = String.valueOf(calendar.get(Calendar.MONTH));
-
-        binding.presentDay.setText(String.valueOf(0));
-        FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).child(year).child(month).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snapshot1:snapshot.getChildren()){
-                    String ans = snapshot1.getKey();
-                    assert ans != null;
-                    FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(year).child(month).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot2) {
-                            String ans1 = snapshot2.getValue(String.class);
-                            dateHashMap1.put(Integer.valueOf(ans), ans1);
-                            binding.customCalendar.setDate(calendar, dateHashMap1);
-                            binding.presentDay.setText(String.valueOf(dateHashMap1.size()));
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
 
         return binding.getRoot();
     }
@@ -122,23 +83,25 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.JANUARY)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot snapshot1:snapshot.getChildren()){
-                                String ans = snapshot1.getKey();
-                                assert ans != null;
-                                FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.JANUARY)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot2) {
-                                        Object val = snapshot2.getValue(String.class);
-                                        dateMap[0].put(Integer.valueOf(ans), val);
-                                        binding.customCalendar.setDate(calendar2, dateMap[0]);
-                                        binding.presentDay.setText(String.valueOf(dateMap[0].size()));
-                                    }
+                            if(snapshot.exists()){
+                                for(DataSnapshot snapshot1:snapshot.getChildren()){
+                                    String ans = snapshot1.getKey();
+                                    assert ans != null;
+                                    FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.JANUARY)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot2) {
+                                            Object val = snapshot2.getValue(String.class);
+                                            dateMap[0].put(Integer.valueOf(ans), val);
+                                            binding.customCalendar.setDate(calendar2, dateMap[0]);
+                                            binding.presentDay.setText(String.valueOf(dateMap[0].size()));
+                                        }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
 
-                                    }
-                                });
+                                        }
+                                    });
+                                }
                             }
                         }
 
@@ -157,23 +120,25 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.FEBRUARY)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot snapshot1:snapshot.getChildren()){
-                                String ans = snapshot1.getKey();
-                                assert ans != null;
-                                FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.FEBRUARY)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot2) {
-                                        Object val = snapshot2.getValue(String.class);
-                                        dateMap[0].put(Integer.valueOf(ans), val);
-                                        binding.customCalendar.setDate(calendar2, dateMap[0]);
-                                        binding.presentDay.setText(String.valueOf(dateMap[0].size()));
-                                    }
+                            if(snapshot.exists()){
+                                for(DataSnapshot snapshot1:snapshot.getChildren()){
+                                    String ans = snapshot1.getKey();
+                                    assert ans != null;
+                                    FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.FEBRUARY)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot2) {
+                                            Object val = snapshot2.getValue(String.class);
+                                            dateMap[0].put(Integer.valueOf(ans), val);
+                                            binding.customCalendar.setDate(calendar2, dateMap[0]);
+                                            binding.presentDay.setText(String.valueOf(dateMap[0].size()));
+                                        }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
 
-                                    }
-                                });
+                                        }
+                                    });
+                                }
                             }
                         }
 
@@ -192,23 +157,25 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.MARCH)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot snapshot1:snapshot.getChildren()){
-                                String ans = snapshot1.getKey();
-                                assert ans != null;
-                                FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.MARCH)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot2) {
-                                        Object val = snapshot2.getValue(String.class);
-                                        dateMap[0].put(Integer.valueOf(ans), val);
-                                        binding.customCalendar.setDate(calendar2, dateMap[0]);
-                                        binding.presentDay.setText(String.valueOf(dateMap[0].size()));
-                                    }
+                            if(snapshot.exists()){
+                                for(DataSnapshot snapshot1:snapshot.getChildren()){
+                                    String ans = snapshot1.getKey();
+                                    assert ans != null;
+                                    FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.MARCH)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot2) {
+                                            Object val = snapshot2.getValue(String.class);
+                                            dateMap[0].put(Integer.valueOf(ans), val);
+                                            binding.customCalendar.setDate(calendar2, dateMap[0]);
+                                            binding.presentDay.setText(String.valueOf(dateMap[0].size()));
+                                        }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
 
-                                    }
-                                });
+                                        }
+                                    });
+                                }
                             }
                         }
 
@@ -227,23 +194,25 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.APRIL)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot snapshot1:snapshot.getChildren()){
-                                String ans = snapshot1.getKey();
-                                assert ans != null;
-                                FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.APRIL)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot2) {
-                                        Object val = snapshot2.getValue(String.class);
-                                        dateMap[0].put(Integer.valueOf(ans), val);
-                                        binding.customCalendar.setDate(calendar2, dateMap[0]);
-                                        binding.presentDay.setText(String.valueOf(dateMap[0].size()));
-                                    }
+                            if(snapshot.exists()){
+                                for(DataSnapshot snapshot1:snapshot.getChildren()){
+                                    String ans = snapshot1.getKey();
+                                    assert ans != null;
+                                    FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.APRIL)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot2) {
+                                            Object val = snapshot2.getValue(String.class);
+                                            dateMap[0].put(Integer.valueOf(ans), val);
+                                            binding.customCalendar.setDate(calendar2, dateMap[0]);
+                                            binding.presentDay.setText(String.valueOf(dateMap[0].size()));
+                                        }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
 
-                                    }
-                                });
+                                        }
+                                    });
+                                }
                             }
                         }
 
@@ -262,23 +231,25 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.MAY)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot snapshot1:snapshot.getChildren()){
-                                String ans = snapshot1.getKey();
-                                assert ans != null;
-                                FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.MAY)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot2) {
-                                        Object val = snapshot2.getValue(String.class);
-                                        dateMap[0].put(Integer.valueOf(ans), val);
-                                        binding.customCalendar.setDate(calendar2, dateMap[0]);
-                                        binding.presentDay.setText(String.valueOf(dateMap[0].size()));
-                                    }
+                            if(snapshot.exists()){
+                                for(DataSnapshot snapshot1:snapshot.getChildren()){
+                                    String ans = snapshot1.getKey();
+                                    assert ans != null;
+                                    FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.MAY)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot2) {
+                                            Object val = snapshot2.getValue(String.class);
+                                            dateMap[0].put(Integer.valueOf(ans), val);
+                                            binding.customCalendar.setDate(calendar2, dateMap[0]);
+                                            binding.presentDay.setText(String.valueOf(dateMap[0].size()));
+                                        }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
 
-                                    }
-                                });
+                                        }
+                                    });
+                                }
                             }
                         }
 
@@ -297,27 +268,29 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.JUNE)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot snapshot1:snapshot.getChildren()){
-                                String ans = snapshot1.getKey();
-                                assert ans != null;
-                                FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.JUNE)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot2) {
-                                        Object val = snapshot2.getValue(String.class);
-                                        dateMap[0].put(Integer.valueOf(ans), val);
-                                        binding.customCalendar.setDate(calendar2, dateMap[0]);
-                                        if(dateMap[0].size() == 0){
-                                            binding.presentDay.setText(String.valueOf(0));
-                                        } else{
-                                            binding.presentDay.setText(String.valueOf(dateMap[0].size()));
+                            if(snapshot.exists()){
+                                for(DataSnapshot snapshot1:snapshot.getChildren()){
+                                    String ans = snapshot1.getKey();
+                                    assert ans != null;
+                                    FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.JUNE)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot2) {
+                                            Object val = snapshot2.getValue(String.class);
+                                            dateMap[0].put(Integer.valueOf(ans), val);
+                                            binding.customCalendar.setDate(calendar2, dateMap[0]);
+                                            if(dateMap[0].size() == 0){
+                                                binding.presentDay.setText(String.valueOf(0));
+                                            } else{
+                                                binding.presentDay.setText(String.valueOf(dateMap[0].size()));
+                                            }
                                         }
-                                    }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
 
-                                    }
-                                });
+                                        }
+                                    });
+                                }
                             }
                         }
 
@@ -336,27 +309,29 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.JULY)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot snapshot1:snapshot.getChildren()){
-                                String ans = snapshot1.getKey();
-                                assert ans != null;
-                                FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.JULY)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot2) {
-                                        Object val = snapshot2.getValue(String.class);
-                                        dateMap[0].put(Integer.valueOf(ans), val);
-                                        binding.customCalendar.setDate(calendar2, dateMap[0]);
-                                        if(dateMap[0].size() == 0){
-                                            binding.presentDay.setText(String.valueOf(0));
-                                        } else{
-                                            binding.presentDay.setText(String.valueOf(dateMap[0].size()));
+                            if(snapshot.exists()){
+                                for(DataSnapshot snapshot1:snapshot.getChildren()){
+                                    String ans = snapshot1.getKey();
+                                    assert ans != null;
+                                    FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.JULY)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot2) {
+                                            Object val = snapshot2.getValue(String.class);
+                                            dateMap[0].put(Integer.valueOf(ans), val);
+                                            binding.customCalendar.setDate(calendar2, dateMap[0]);
+                                            if(dateMap[0].size() == 0){
+                                                binding.presentDay.setText(String.valueOf(0));
+                                            } else{
+                                                binding.presentDay.setText(String.valueOf(dateMap[0].size()));
+                                            }
                                         }
-                                    }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
 
-                                    }
-                                });
+                                        }
+                                    });
+                                }
                             }
                         }
 
@@ -375,24 +350,26 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.AUGUST)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot snapshot1:snapshot.getChildren()){
-                                String ans = snapshot1.getKey();
-                                assert ans != null;
-                                FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.AUGUST)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot2) {
-                                        Object val = snapshot2.getValue(String.class);
-                                        dateMap[0].put(Integer.valueOf(ans), val);
-                                        binding.customCalendar.setDate(calendar2, dateMap[0]);
-                                        Toast.makeText(getActivity(), String.valueOf(dateMap[0].size()), Toast.LENGTH_LONG).show();
-                                        binding.presentDay.setText(String.valueOf(dateMap[0].size()));
-                                    }
+                            if(snapshot.exists()){
+                                for(DataSnapshot snapshot1:snapshot.getChildren()){
+                                    String ans = snapshot1.getKey();
+                                    assert ans != null;
+                                    FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.AUGUST)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot2) {
+                                            Object val = snapshot2.getValue(String.class);
+                                            dateMap[0].put(Integer.valueOf(ans), val);
+                                            binding.customCalendar.setDate(calendar2, dateMap[0]);
+                                            Toast.makeText(getActivity(), String.valueOf(dateMap[0].size()), Toast.LENGTH_LONG).show();
+                                            binding.presentDay.setText(String.valueOf(dateMap[0].size()));
+                                        }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
 
-                                    }
-                                });
+                                        }
+                                    });
+                                }
                             }
                         }
 
@@ -411,23 +388,25 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.SEPTEMBER)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot snapshot1:snapshot.getChildren()){
-                                String ans = snapshot1.getKey();
-                                assert ans != null;
-                                FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.SEPTEMBER)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot2) {
-                                        Object val = snapshot2.getValue(String.class);
-                                        dateMap[0].put(Integer.valueOf(ans), val);
-                                        binding.customCalendar.setDate(calendar2, dateMap[0]);
-                                        binding.presentDay.setText(String.valueOf(dateMap[0].size()));
-                                    }
+                            if(snapshot.exists()){
+                                for(DataSnapshot snapshot1:snapshot.getChildren()){
+                                    String ans = snapshot1.getKey();
+                                    assert ans != null;
+                                    FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.SEPTEMBER)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot2) {
+                                            Object val = snapshot2.getValue(String.class);
+                                            dateMap[0].put(Integer.valueOf(ans), val);
+                                            binding.customCalendar.setDate(calendar2, dateMap[0]);
+                                            binding.presentDay.setText(String.valueOf(dateMap[0].size()));
+                                        }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
 
-                                    }
-                                });
+                                        }
+                                    });
+                                }
                             }
                         }
 
@@ -446,23 +425,25 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.OCTOBER)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot snapshot1:snapshot.getChildren()){
-                                String ans = snapshot1.getKey();
-                                assert ans != null;
-                                FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.OCTOBER)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot2) {
-                                        Object val = snapshot2.getValue(String.class);
-                                        dateMap[0].put(Integer.valueOf(ans), val);
-                                        binding.customCalendar.setDate(calendar2, dateMap[0]);
-                                        binding.presentDay.setText(String.valueOf(dateMap[0].size()));
-                                    }
+                            if(snapshot.exists()){
+                                for(DataSnapshot snapshot1:snapshot.getChildren()){
+                                    String ans = snapshot1.getKey();
+                                    assert ans != null;
+                                    FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.OCTOBER)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot2) {
+                                            Object val = snapshot2.getValue(String.class);
+                                            dateMap[0].put(Integer.valueOf(ans), val);
+                                            binding.customCalendar.setDate(calendar2, dateMap[0]);
+                                            binding.presentDay.setText(String.valueOf(dateMap[0].size()));
+                                        }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
 
-                                    }
-                                });
+                                        }
+                                    });
+                                }
                             }
                         }
 
@@ -481,23 +462,25 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.NOVEMBER)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot snapshot1:snapshot.getChildren()){
-                                String ans = snapshot1.getKey();
-                                assert ans != null;
-                                FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.NOVEMBER)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot2) {
-                                        Object val = snapshot2.getValue(String.class);
-                                        dateMap[0].put(Integer.valueOf(ans), val);
-                                        binding.customCalendar.setDate(calendar2, dateMap[0]);
-                                        binding.presentDay.setText(String.valueOf(dateMap[0].size()));
-                                    }
+                            if(snapshot.exists()){
+                                for(DataSnapshot snapshot1:snapshot.getChildren()){
+                                    String ans = snapshot1.getKey();
+                                    assert ans != null;
+                                    FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.NOVEMBER)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot2) {
+                                            Object val = snapshot2.getValue(String.class);
+                                            dateMap[0].put(Integer.valueOf(ans), val);
+                                            binding.customCalendar.setDate(calendar2, dateMap[0]);
+                                            binding.presentDay.setText(String.valueOf(dateMap[0].size()));
+                                        }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
 
-                                    }
-                                });
+                                        }
+                                    });
+                                }
                             }
                         }
 
@@ -516,23 +499,25 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
                     FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.DECEMBER)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot snapshot1:snapshot.getChildren()){
-                                String ans = snapshot1.getKey();
-                                assert ans != null;
-                                FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.DECEMBER)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot2) {
-                                        Object val = snapshot2.getValue(String.class);
-                                        dateMap[0].put(Integer.valueOf(ans), val);
-                                        binding.customCalendar.setDate(calendar2, dateMap[0]);
-                                        binding.presentDay.setText(String.valueOf(dateMap[0].size()));
-                                    }
+                            if(snapshot.exists()){
+                                for(DataSnapshot snapshot1:snapshot.getChildren()){
+                                    String ans = snapshot1.getKey();
+                                    assert ans != null;
+                                    FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))).child(String.valueOf(Calendar.DECEMBER)).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot2) {
+                                            Object val = snapshot2.getValue(String.class);
+                                            dateMap[0].put(Integer.valueOf(ans), val);
+                                            binding.customCalendar.setDate(calendar2, dateMap[0]);
+                                            binding.presentDay.setText(String.valueOf(dateMap[0].size()));
+                                        }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
 
-                                    }
-                                });
+                                        }
+                                    });
+                                }
                             }
                         }
 
@@ -554,5 +539,57 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
         }
 
         return dateMap;
+    }
+
+    private class FirebaseThread extends Thread{
+
+        @Override
+        public void run() {
+            HashMap<Integer,Object> dateHashmap=new HashMap<>();
+
+            // initialize calendar
+            Calendar calendar=  Calendar.getInstance();
+            dateHashmap.put(calendar.get(Calendar.DAY_OF_MONTH),"current");
+            String year = String.valueOf(calendar.get(Calendar.YEAR));
+            String month = String.valueOf(calendar.get(Calendar.MONTH));
+
+            binding.presentDay.setText(String.valueOf(0));
+            FirebaseDatabase.getInstance().getReference()
+                    .child("EndUser")
+                    .child("Attendance")
+                    .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
+                    .child(year)
+                    .child(month)
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()){
+                        for(DataSnapshot snapshot1:snapshot.getChildren()) {
+                            String ans = snapshot1.getKey();
+                            assert ans != null;
+                            FirebaseDatabase.getInstance().getReference().child("EndUser").child("Attendance").child(FirebaseAuth.getInstance().getUid()).child(year).child(month).child(ans).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot2) {
+                                    String ans1 = snapshot2.getValue(String.class);
+                                    dateHashMap1.put(Integer.valueOf(ans), ans1);
+                                    binding.customCalendar.setDate(calendar, dateHashMap1);
+                                    binding.presentDay.setText(String.valueOf(dateHashMap1.size()));
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
     }
 }
