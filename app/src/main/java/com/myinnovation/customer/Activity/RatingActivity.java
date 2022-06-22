@@ -75,7 +75,25 @@ public class RatingActivity extends AppCompatActivity {
                                                     notification.setNotificationType("Rating");
                                                     notification.setNotificationBy(FirebaseAuth.getInstance().getUid());
 
+<<<<<<< HEAD
                                                     FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(id).setValue(notification).addOnCompleteListener(task1 -> {
+=======
+                                    assert id != null;
+                                    FirebaseDatabase.getInstance().getReference().child("Customer").child("Ratings").child(id).setValue(rating).addOnCompleteListener(task -> {
+                                        if(task.isSuccessful()){
+                                            Toast.makeText(RatingActivity.this, "Rating Updated Successfully", Toast.LENGTH_SHORT).show();
+                                            Notification notification = new Notification();
+                                            notification.setNotificationType("Rating");
+                                            notification.setNotificationBy(FirebaseAuth.getInstance().getUid());
+
+<<<<<<< HEAD
+                                                FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(id).push().setValue(notification).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+=======
+                                            FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(id).setValue(notification).addOnCompleteListener(task1 -> {
+>>>>>>> origin
+>>>>>>> d47cdad45670fdc1dedd0a57f88d08667d479eab
 
                                                     });
                                                 }
@@ -124,8 +142,11 @@ public class RatingActivity extends AppCompatActivity {
         binding.ratingBar.setEnabled(true);
         binding.editRatingBtn.setEnabled(true);
         // else
+<<<<<<< HEAD
+=======
 //        binding.ratingBar.setEnabled(false);
 //        binding.editRatingBtn.setEnabled(false);
 
+>>>>>>> origin
     }
 }

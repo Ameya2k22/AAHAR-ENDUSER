@@ -85,6 +85,17 @@ public class MyReviewActivity extends AppCompatActivity {
 
                         FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(id).setValue(notification).addOnCompleteListener(task1 -> {
 
+<<<<<<< HEAD
+                                    FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(id).push().setValue(notification).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                        }
+                                    });
+                                }
+                            }
+=======
+>>>>>>> origin
                         });
                     }
                 });
