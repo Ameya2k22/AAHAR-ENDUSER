@@ -14,14 +14,15 @@
         android:layout_marginTop="60dp"
         android:background="@drawable/text_box"
         android:backgroundTint="@color/white"
-        android:text="Use Razor Pay"
+        android:text="@string/use_razor_pay"
         android:textColor="@color/dark_orange"
         android:textColorHint="@color/white"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:targetApi="lollipop" />
 
     <LinearLayout
         android:id="@+id/payment_successful_linear_layout"
@@ -44,6 +45,7 @@
             android:layout_margin="40dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_done"
+            android:contentDescription="@string/payment_successfull"
             app:layout_constraintBottom_toTopOf="@+id/textView4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -59,7 +61,6 @@
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/oswald"
             android:gravity="center"
-            android:inputType="textMultiLine"
             android:text="@string/congratulations_payment_is_successfully_done"
             android:textColor="@color/green"
             android:textSize="32sp"
@@ -79,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:text="Payment Id :"
+                android:text="@string/payment_id"
                 android:textColor="@color/green"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -129,12 +130,12 @@
             android:background="@drawable/text_box"
             android:fontFamily="@font/oswald"
             android:gravity="center"
-            android:hint="Enter Amount"
+            android:hint="@string/enter_amount"
             android:inputType="number"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="20sp"
-           />
+            android:importantForAutofill="no" />
 
         <TextView
             android:id="@+id/upi_id"
@@ -143,7 +144,7 @@
             android:layout_gravity="center"
             android:layout_margin="8dp"
             android:background="@drawable/text_box"
-            android:text="mahesh.2759@waaxis"
+            android:text="@string/upi_id"
             android:fontFamily="@font/oswald"
             android:gravity="center"
             android:padding="8dp"
@@ -163,7 +164,7 @@
             android:fontFamily="@font/oswald"
             android:gravity="center"
             android:padding="8dp"
-            android:text="Mahesh Pimpale"
+            android:text="@string/owner_name"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="20sp"
@@ -175,14 +176,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="8dp"
+            android:inputType="text"
             android:background="@drawable/text_box"
             android:fontFamily="@font/oswald"
             android:gravity="center"
-            android:hint="Enter Note"
+            android:hint="@string/enter_note"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="20sp"
-           />
+            android:importantForAutofill="no" />
 
         <Button
             android:id="@+id/send"
@@ -194,7 +196,7 @@
             android:background="@color/dark_orange"
             android:fontFamily="@font/oswald"
             android:gravity="center"
-            android:text="send by upi"
+            android:text="@string/send_by_upi"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="20sp"

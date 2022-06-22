@@ -6,8 +6,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,6 +13,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.myinnovation.customer.Models.Notification;
 import com.myinnovation.customer.databinding.ActivityRatingBinding;
+
+import java.util.Objects;
 
 public class RatingActivity extends AppCompatActivity {
 
@@ -35,16 +35,18 @@ public class RatingActivity extends AppCompatActivity {
         });
 
 
-        FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(FirebaseAuth.getInstance().getUid()).child("mess_id").addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).child("mess_id").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String id = snapshot.getValue(String.class);
 
+                assert id != null;
                 FirebaseDatabase.getInstance().getReference().child("Customer").child("Ratings").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String rating1 = snapshot.getValue(String.class);
-                        binding.ratingBar.setRating(Float.valueOf(rating1));
+                        assert rating1 != null;
+                        binding.ratingBar.setRating(Float.parseFloat(rating1));
 
                         messRatingValue = binding.ratingBar.getRating();
 
@@ -65,22 +67,23 @@ public class RatingActivity extends AppCompatActivity {
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     String id = snapshot.getValue(String.class);
 
-                                    FirebaseDatabase.getInstance().getReference().child("Customer").child("Ratings").child(id).setValue(rating).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful()){
-                                                Toast.makeText(RatingActivity.this, "Rating Updated Successfully", Toast.LENGTH_SHORT).show();
-                                                Notification notification = new Notification();
-                                                notification.setNotificationType("Rating");
-                                                notification.setNotificationBy(FirebaseAuth.getInstance().getUid());
+                                    assert id != null;
+                                    FirebaseDatabase.getInstance().getReference().child("Customer").child("Ratings").child(id).setValue(rating).addOnCompleteListener(task -> {
+                                        if(task.isSuccessful()){
+                                            Toast.makeText(RatingActivity.this, "Rating Updated Successfully", Toast.LENGTH_SHORT).show();
+                                            Notification notification = new Notification();
+                                            notification.setNotificationType("Rating");
+                                            notification.setNotificationBy(FirebaseAuth.getInstance().getUid());
 
+<<<<<<< HEAD
                                                 FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(id).push().setValue(notification).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
+=======
+                                            FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(id).setValue(notification).addOnCompleteListener(task1 -> {
+>>>>>>> origin
 
-                                                    }
-                                                });
-                                            }
+                                            });
                                         }
                                     });
                                 }
@@ -119,5 +122,11 @@ public class RatingActivity extends AppCompatActivity {
         binding.ratingBar.setEnabled(true);
         binding.editRatingBtn.setEnabled(true);
         // else
+<<<<<<< HEAD
+=======
+//        binding.ratingBar.setEnabled(false);
+//        binding.editRatingBtn.setEnabled(false);
+
+>>>>>>> origin
     }
 }

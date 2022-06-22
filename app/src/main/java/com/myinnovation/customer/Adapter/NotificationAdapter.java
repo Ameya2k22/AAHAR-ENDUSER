@@ -46,14 +46,23 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
-                if (type.equals("Joined")) {
-                    holder.notification.setText(user.getName() + " joined the mess");
-                } else if (type.equals("Review")) {
-                    holder.notification.setText(user.getName() + " reviewed the mess");
-                } else if (type.equals("Rating")) {
-                    holder.notification.setText(user.getName() + " gives rating to the mess");
-                } else if (type.equals("Payment")) {
-                    holder.notification.setText(user.getName() + " has done the payment");
+                switch (type) {
+                    case "Joined":
+                        assert user != null;
+                        holder.notification.setText(new StringBuilder().append(user.getName()).append(" joined the mess").toString());
+                        break;
+                    case "Review":
+                        assert user != null;
+                        holder.notification.setText(new StringBuilder().append(user.getName()).append(" reviewed the mess").toString());
+                        break;
+                    case "Rating":
+                        assert user != null;
+                        holder.notification.setText(new StringBuilder().append(user.getName()).append(" gives rating to the mess").toString());
+                        break;
+                    case "Payment":
+                        assert user != null;
+                        holder.notification.setText(new StringBuilder().append(user.getName()).append(" has done the payment").toString());
+                        break;
                 }
 
             }
@@ -70,7 +79,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         return notifications.size();
     }
 
-    public class VH extends RecyclerView.ViewHolder {
+    public static class VH extends RecyclerView.ViewHolder {
         TextView notification;
         public VH(@NonNull View itemView) {
             super(itemView);

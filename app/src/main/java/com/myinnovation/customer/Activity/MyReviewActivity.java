@@ -1,7 +1,6 @@
 package com.myinnovation.customer.Activity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -9,8 +8,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,6 +17,8 @@ import com.myinnovation.customer.Models.Notification;
 import com.myinnovation.customer.Models.Reviews;
 import com.myinnovation.customer.R;
 import com.myinnovation.customer.databinding.ActivityMyReviewBinding;
+
+import java.util.Objects;
 
 public class MyReviewActivity extends AppCompatActivity {
 
@@ -39,16 +38,18 @@ public class MyReviewActivity extends AppCompatActivity {
         reviewBody = findViewById(R.id.review_message);
         addButton = findViewById(R.id.add_review);
 
-        FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(FirebaseAuth.getInstance().getUid()).child("mess_id").addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).child("mess_id").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String id = snapshot.getValue(String.class);
 
+                assert id != null;
                 FirebaseDatabase.getInstance().getReference().child("Customer").child("Reviews").child(id).child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
                             Reviews reviews = snapshot.getValue(Reviews.class);
+                            assert reviews != null;
                             reviewTitle.setText(reviews.getReviewTitle());
                             reviewBody.setText(reviews.getReviewBody());
                         }
@@ -66,27 +67,25 @@ public class MyReviewActivity extends AppCompatActivity {
             }
         });
 
-        addButton.setOnClickListener(new View.OnClickListener() {
+        addButton.setOnClickListener(view -> FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(FirebaseAuth.getInstance().getUid()).child("mess_id").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String id = snapshot.getValue(String.class);
+                String title = reviewTitle.getText().toString();
+                String body = reviewBody.getText().toString();
 
-                FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(FirebaseAuth.getInstance().getUid()).child("mess_id").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String id = snapshot.getValue(String.class);
-                        String title = reviewTitle.getText().toString();
-                        String body = reviewBody.getText().toString();
+                Reviews reviews = new Reviews(title, body);
+                assert id != null;
+                FirebaseDatabase.getInstance().getReference().child("Customer").child("Reviews").child(id).child(FirebaseAuth.getInstance().getUid()).setValue(reviews).addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        Toast.makeText(MyReviewActivity.this, "Review Added successfully", Toast.LENGTH_SHORT).show();
+                        Notification notification = new Notification();
+                        notification.setNotificationType("Review");
+                        notification.setNotificationBy(FirebaseAuth.getInstance().getUid());
 
-                        Reviews reviews = new Reviews(title, body);
-                        FirebaseDatabase.getInstance().getReference().child("Customer").child("Reviews").child(id).child(FirebaseAuth.getInstance().getUid()).setValue(reviews).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
-                                    Toast.makeText(MyReviewActivity.this, "Review Added successfully", Toast.LENGTH_SHORT).show();
-                                    Notification notification = new Notification();
-                                    notification.setNotificationType("Review");
-                                    notification.setNotificationBy(FirebaseAuth.getInstance().getUid());
+                        FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(id).setValue(notification).addOnCompleteListener(task1 -> {
 
+<<<<<<< HEAD
                                     FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(id).push().setValue(notification).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
@@ -95,16 +94,18 @@ public class MyReviewActivity extends AppCompatActivity {
                                     });
                                 }
                             }
+=======
+>>>>>>> origin
                         });
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
                     }
                 });
             }
-        });
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        }));
 
 
     }

@@ -31,8 +31,7 @@ public class NotificationFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentNotificationBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-//
+        //
 //        RecyclerView recyclerView = binding.recyclerView;
 //        ArrayList<Notification> notifications = new ArrayList<>();
 //        NotificationAdapter adapter = new NotificationAdapter(notifications, getActivity());
@@ -68,7 +67,7 @@ public class NotificationFragment extends Fragment {
 //            }
 //        });
 
-        return root;
+        return binding.getRoot();
     }
 
     @Override

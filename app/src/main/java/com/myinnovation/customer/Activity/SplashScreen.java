@@ -2,17 +2,17 @@ package com.myinnovation.customer.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.myinnovation.customer.R;
 
+@SuppressLint("CustomSplashScreen")
 public class SplashScreen extends AppCompatActivity {
     ImageView image;
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,12 +22,9 @@ public class SplashScreen extends AppCompatActivity {
         image.animate().translationY(1200).setDuration(2000);
 
 
-        new Handler().postDelayed(new Runnable(){
-            @Override
-            public void run(){
-                Intent i = new Intent(getApplicationContext(),  SignUpActivity.class);
-                startActivity(i);
-            }
+        new Handler().postDelayed(() -> {
+            Intent i = new Intent(getApplicationContext(),  SignUpActivity.class);
+            startActivity(i);
         },4000);
     }
 }

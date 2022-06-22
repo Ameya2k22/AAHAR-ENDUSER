@@ -5,17 +5,15 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.myinnovation.customer.Activity.MessDetailActivity;
 import com.myinnovation.customer.Models.Customer;
 import com.myinnovation.customer.R;
 import com.myinnovation.customer.databinding.SingleMessLayoutBinding;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -42,10 +40,10 @@ public class MessAdapter extends RecyclerView.Adapter<MessAdapter.VH> {
         holder.binding.MessName.setText(customer.getMess_name());
         holder.binding.Location.setText(customer.getMess_location());
 
-//        Picasso.get()
-//                .load(customer.getImage())
-//                .placeholder(R.drawable.aahar_logo)
-//                .into(holder.binding.image);
+        Picasso.get()
+                .load(customer.getImage())
+                .placeholder(R.drawable.aahar_logo)
+                .into(holder.binding.image);
 
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), MessDetailActivity.class);
@@ -64,7 +62,7 @@ public class MessAdapter extends RecyclerView.Adapter<MessAdapter.VH> {
         void onClick(View v, int position);
     }
 
-    public class VH extends RecyclerView.ViewHolder{
+    public static class VH extends RecyclerView.ViewHolder{
         SingleMessLayoutBinding binding;
         public VH(@NonNull View itemView) {
             super(itemView);

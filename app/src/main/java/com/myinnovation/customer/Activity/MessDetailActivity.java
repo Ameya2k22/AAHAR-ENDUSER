@@ -2,7 +2,6 @@ package com.myinnovation.customer.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -10,8 +9,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,15 +21,16 @@ import com.myinnovation.customer.Models.User;
 import com.myinnovation.customer.R;
 import com.myinnovation.customer.databinding.ActivityMessDetailBinding;
 
+import java.util.Objects;
+
 public class MessDetailActivity extends AppCompatActivity {
 
     ActivityMessDetailBinding binding;
 
     TextView mess_email, mess_location, mess_name, monthlyPrice, owner_name, specialDishes, mess_mobile;
     Button Join;
-    FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    User user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,17 +42,16 @@ public class MessDetailActivity extends AppCompatActivity {
         Intent startIntent = getIntent();
         String key = startIntent.getStringExtra("KEY");
 
-        binding.complaintsAndReviews.setOnClickListener(v -> {
-            startActivity(new Intent(this, ReviewsActivity.class));
-        });
+        binding.complaintsAndReviews.setOnClickListener(v -> startActivity(new Intent(this, ReviewsActivity.class)));
 
 
         database.getReference().child("Customer").child("Mess-Info").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snapshot1 : snapshot.getChildren()){
-                    if(snapshot1.getKey().equals(key)){
+                    if(Objects.equals(snapshot1.getKey(), key)){
                         Customer customer = snapshot1.getValue(Customer.class);
+                        assert customer != null;
                         mess_email.setText(customer.getMess_email());
                         mess_name.setText(customer.getMess_name());
                         mess_mobile.setText(customer.getPhone_no());
@@ -65,40 +62,44 @@ public class MessDetailActivity extends AppCompatActivity {
                     }
                 }
 
-                Join.setOnClickListener(new View.OnClickListener() {
+                Join.setOnClickListener(view -> database.getReference().child("EndUser").child("Details").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onClick(View view) {
-                        database.getReference().child("EndUser").child("Details").addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for(DataSnapshot snapshot1:snapshot.getChildren()){
-                                    if(FirebaseAuth.getInstance().getUid().equals(snapshot1.getKey())){
-                                        User user = snapshot1.getValue(User.class);
-                                        user.setMess_id(key);
-                                        StudentInfo studentInfo = new StudentInfo();
-                                        studentInfo.setStudentID(FirebaseAuth.getInstance().getUid());
-                                        studentInfo.setDayRemaining(30);
-                                        database.getReference().child("EndUser").child("Details").child(FirebaseAuth.getInstance().getUid()).setValue(user);
-                                        database.getReference().child("Customer").child("Students").child(key).push().setValue(studentInfo);
-                                        String rating = "0";
-                                        database.getReference().child("Customer").child("Ratings").child(key).setValue(rating);
-                                        Toast.makeText(MessDetailActivity.this, "Joined", Toast.LENGTH_SHORT).show();
-                                        Notification notification = new Notification();
-                                        notification.setNotificationType("Joined");
-                                        notification.setNotificationBy(FirebaseAuth.getInstance().getUid());
+                    public void onDataChange(@NonNull DataSnapshot snapshot12) {
+                        for(DataSnapshot snapshot1: snapshot12.getChildren()){
+                            if(Objects.equals(FirebaseAuth.getInstance().getUid(), snapshot1.getKey())){
+                                User user = snapshot1.getValue(User.class);
+                                assert user != null;
+                                user.setMess_id(key);
+                                StudentInfo studentInfo = new StudentInfo();
+                                studentInfo.setStudentID(FirebaseAuth.getInstance().getUid());
+                                studentInfo.setDayRemaining(30);
+                                database.getReference().child("EndUser").child("Details").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).setValue(user);
+                                database.getReference().child("Customer").child("Students").child(key).push().setValue(studentInfo);
+                                String rating = "0";
+                                database.getReference().child("Customer").child("Ratings").child(key).setValue(rating);
+                                Toast.makeText(MessDetailActivity.this, "Joined", Toast.LENGTH_SHORT).show();
+                                Notification notification = new Notification();
+                                notification.setNotificationType("Joined");
+                                notification.setNotificationBy(FirebaseAuth.getInstance().getUid());
 
+<<<<<<< HEAD
                                         FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(key).push().setValue(notification);
                                     }
                                 }
-                            }
+=======
+                                FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(key).setValue(notification).addOnCompleteListener(task -> {
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
+                                });
+>>>>>>> origin
                             }
-                        });
+                        }
                     }
-                });
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                }));
             }
 
             @Override

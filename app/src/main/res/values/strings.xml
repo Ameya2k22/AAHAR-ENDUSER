@@ -56,7 +56,42 @@
     <string name="ratings">Ratings</string>
     <string name="price_per_month">Price per month :</string>
     <string name="edit_rating">Edit Rating</string>
+<<<<<<< HEAD
     <string name="overall_rating">Overall Rating</string>
     <string name="congratulations_payment_is_successfully_done">Congratulations Payment is successfully done</string>
+=======
+    <string name="congratulations_payment_is_successfully_done">Congratulations Payment is successfully done</string>
+    <string name="overall_rating">Overall Rating</string>
+>>>>>>> origin
     <string name="total_present_day_in_this_month">Total Present Day in this Month</string>
+    <string name="or">OR</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="enter_the_otp">Enter the OTP</string>
+    <string name="_9">9</string>
+    <string name="verify">Verify</string>
+    <string name="otp_verification">OTP verification</string>
+    <string name="mess_owner">Mess Owner :</string>
+    <string name="address">Address :</string>
+    <string name="rs">Rs.</string>
+    <string name="special_dishes">special dishes</string>
+    <string name="complaints_and_reviews_click_here"><![CDATA[complaints and reviews -> click here]]></string>
+    <string name="ratings_click_here"><![CDATA[ratings -> click here]]></string>
+    <string name="pay">Pay</string>
+    <string name="mess_mobile">Mobile :</string>
+    <string name="mess_email">Email :</string>
+    <string name="price_month">Price/Month:</string>
+    <string name="mess_logo">Mess Logo</string>
+    <string name="today_s_attendance">Today\'s Attendance</string>
+    <string name="are_you_coming_for_eat_today">Are you coming for eat today?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="days_remaining">Days Remaining</string>
+    <string name="use_razor_pay">Use Razor Pay</string>
+    <string name="payment_id">Payment Id :</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="upi_id">UPI Id</string>
+    <string name="owner_name">Owner Name</string>
+    <string name="enter_note">Enter Note</string>
+    <string name="send_by_upi">send by upi</string>
+    <string name="payment_successfull">payment successfull</string>
 </resources>

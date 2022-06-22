@@ -41,13 +41,11 @@ public class ExploreFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    private FragmentExploreBinding binding;
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        binding = FragmentExploreBinding.inflate(inflater, container, false);
+        com.myinnovation.customer.databinding.FragmentExploreBinding binding = FragmentExploreBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
         auth = FirebaseAuth.getInstance();
@@ -67,6 +65,7 @@ public class ExploreFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                     Customer customerInfo = snapshot1.getValue(Customer.class);
+                    assert customerInfo != null;
                     customerInfo.setCustomer_id(snapshot1.getKey());
                     customers.add(customerInfo);
                 }
