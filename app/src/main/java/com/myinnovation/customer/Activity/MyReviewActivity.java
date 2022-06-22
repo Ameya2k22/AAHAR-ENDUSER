@@ -87,7 +87,7 @@ public class MyReviewActivity extends AppCompatActivity {
                                     notification.setNotificationType("Review");
                                     notification.setNotificationBy(FirebaseAuth.getInstance().getUid());
 
-                                    FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(id).setValue(notification).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(id).push().setValue(notification).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
 

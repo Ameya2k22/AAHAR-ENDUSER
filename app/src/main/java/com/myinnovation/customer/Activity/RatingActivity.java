@@ -74,7 +74,7 @@ public class RatingActivity extends AppCompatActivity {
                                                 notification.setNotificationType("Rating");
                                                 notification.setNotificationBy(FirebaseAuth.getInstance().getUid());
 
-                                                FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(id).setValue(notification).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(id).push().setValue(notification).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
 
@@ -119,13 +119,5 @@ public class RatingActivity extends AppCompatActivity {
         binding.ratingBar.setEnabled(true);
         binding.editRatingBtn.setEnabled(true);
         // else
-<<<<<<< HEAD
-//        binding.ratingBar.setEnabled(false);
-//        binding.editRatingBtn.setEnabled(false);
-
-        binding.ratingBar.setEnabled(true);
-        binding.editRatingBtn.setEnabled(true);
-=======
->>>>>>> origin
     }
 }
