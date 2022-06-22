@@ -26,7 +26,7 @@ public class SignUpActivity extends AppCompatActivity {
     private ActivitySignUpBinding binding;
 
     private Uri userImageUri;
-    private String userImage = " ";
+    private String userImage = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
