@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:fontFamily="@font/oswald"
-                android:gravity="le'"
+                android:gravity="center"
                 android:inputType="textMultiLine"
                 android:minHeight="48dp"
                 android:text="Walchand College of Engineering, Vishrambagh, Sangli, 416262"
