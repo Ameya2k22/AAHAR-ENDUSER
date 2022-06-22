@@ -11,9 +11,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.myinnovation.customer.Models.MessInfo;
 import com.myinnovation.customer.Models.Notification;
 import com.myinnovation.customer.R;
 import com.myinnovation.customer.databinding.ActivityPaymentBinding;
@@ -33,6 +39,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
     private String name = "";
     private String Mess_Owner_Mobile_number = "";
     private String Mess_Owner_Email = "";
+    private String Mess_Owner_Name = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +61,41 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             if(amount.equals("") || amount.isEmpty() || note.equals("") || note.isEmpty() || binding.name.equals("") || binding.upiId.equals("")){
                 Toast.makeText(PaymentActivity.this, "Fields cannot be empty.", Toast.LENGTH_LONG).show();
             } else{
-                payUsingUpi(amount, binding.upiId.getText().toString(), binding.name.getText().toString(), note);
+//                payUsingUpi(amount, binding.upiId.getText().toString(), binding.name.getText().toString(), note);
+                FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(FirebaseAuth.getInstance().getUid()).child("mess_id").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            String id = snapshot.getValue(String.class);
+                            FirebaseDatabase.getInstance().getReference().child("Customer").child("Mess-Info").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    if(snapshot.exists()){
+                                        for(DataSnapshot snapshot2:snapshot.getChildren()){
+                                            if(snapshot2.getKey().equals(id)){
+                                                MessInfo messInfo = snapshot2.getValue(MessInfo.class);
+                                                binding.paymentId.setText(messInfo.getMess_upi_id());
+                                                binding.name.setText(messInfo.getMess_name());
+                                                payUsingUpi(amount, binding.paymentId.getText().toString(), binding.name.getText().toString(), note);
+
+                                            }
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
         });
     }
@@ -166,33 +207,65 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
 
     private void makepayment()
     {
-        if(amount == 0 || Mess_Owner_Mobile_number.isEmpty() || Mess_Owner_Email.isEmpty() || Mess_Owner_Mobile_number.equals("")){
-            Toast.makeText(this, "Empty Fields", Toast.LENGTH_LONG).show();
-            return;
-        }
-        Checkout checkout = new Checkout();
-        checkout.setKeyID("rzp_test_YogxmByRqeM0xU");
 
-        checkout.setImage(R.drawable.aahar_logo);
-        final Activity activity = this;
+        FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(FirebaseAuth.getInstance().getUid()).child("mess_id").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    String id = snapshot.getValue(String.class);
+                    FirebaseDatabase.getInstance().getReference().child("Customer").child("Mess-Info").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists()){
+                                for(DataSnapshot snapshot2:snapshot.getChildren()){
+                                    if(snapshot2.getKey().equals(id)){
+                                        MessInfo messInfo = snapshot2.getValue(MessInfo.class);
+                                        amount = Integer.valueOf(messInfo.getMonthlyPrice());
+                                        Mess_Owner_Mobile_number = messInfo.getPhone_no();
+                                        Mess_Owner_Email = messInfo.getMess_email();
+                                        Mess_Owner_Name = messInfo.getOwner_name();
 
-        try {
-            JSONObject options = new JSONObject();
+                                        Checkout checkout = new Checkout();
+                                        checkout.setKeyID("rzp_test_YogxmByRqeM0xU");
 
-            options.put("name", "Aster Mess");
-            options.put("description", "Reference No. #123456");
-            options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
-            // options.put("order_id", "order_DBJOWzybf0sJbb");//from response of step 3.
-            options.put("theme.color", "#3399cc");
-            options.put("currency", "INR");
-            options.put("amount", amount*100);//300 X 100
+                                        checkout.setImage(R.drawable.aahar_logo);
 
-            options.put("prefill.email", "maheshpimple2002@gmail.com");
-            options.put("prefill.contact","+91" + "9653652759");
-            checkout.open(activity, options);
-        } catch(Exception e) {
-            Log.e("TAG", "Error in starting Razorpay Checkout", e);
-        }
+                                        try {
+                                            JSONObject options = new JSONObject();
+
+                                            options.put("name", messInfo.getMess_name());
+                                            options.put("description", "Mess Paymenr");
+                                            // options.put("order_id", "order_DBJOWzybf0sJbb");//from response of step 3.
+                                            options.put("theme.color", "#3399cc");
+                                            options.put("currency", "INR");
+                                            options.put("amount", amount*100);//300 X 100
+
+                                            options.put("prefill.email", Mess_Owner_Email);
+                                            options.put("prefill.contact","+91" + Mess_Owner_Mobile_number);
+                                            checkout.open(PaymentActivity.this, options);
+                                        } catch(Exception e) {
+                                            Log.e("TAG", "Error in starting Razorpay Checkout", e);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
     }
 
     @Override

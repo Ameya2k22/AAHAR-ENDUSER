@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -36,6 +37,7 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         FirebaseThread thread = new FirebaseThread();
         thread.start();
+
         binding.complaintsAndReviews.setOnClickListener(v -> startActivity(new Intent(getContext(), ReviewsActivity.class)));
 
         binding.PayAmount.setOnClickListener(v -> startActivity(new Intent(getContext(), PaymentActivity.class)));
@@ -61,22 +63,23 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()){
+                        binding.messJoinedCardView.setVisibility(View.VISIBLE);
+                        binding.noMessCardView.setVisibility(View.GONE);
                         String id = snapshot.getValue(String.class);
                         database.getReference().child("Customer").child("Mess-Info").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if(snapshot.exists()){
-                                    for(DataSnapshot snapshot1 : snapshot.getChildren()){
-                                        if(Objects.requireNonNull(snapshot1.getKey()).equals(id)){
+                                    for (DataSnapshot snapshot1:snapshot.getChildren()){
+                                        if(snapshot1.getKey().equals(id)){
                                             Customer customer = snapshot1.getValue(Customer.class);
-                                            assert customer != null;
-                                            mess_email.setText(customer.getMess_email());
-                                            mess_name.setText(customer.getMess_name());
-                                            mess_mobile.setText(customer.getPhone_no());
-                                            mess_location.setText(customer.getMess_location());
-                                            monthlyPrice.setText(customer.getMonthlyPrice());
-                                            owner_name.setText(customer.getOwner_name());
-                                            specialDishes.setText(customer.getSpecialDishes());
+                                            binding.messName.setText(customer.getMess_name());
+                                            binding.messEmail.setText(customer.getMess_email());
+                                            binding.ownerName.setText(customer.getOwner_name());
+                                            binding.messMobile.setText(customer.getPhone_no());
+                                            binding.monthlyPrice.setText(customer.getMonthlyPrice());
+                                            binding.messLocation.setText(customer.getMess_location());
+                                            binding.specialDishes.setText(customer.getSpecialDishes());
                                         }
                                     }
                                 }
@@ -88,6 +91,10 @@ public class HomeFragment extends Fragment {
 
                             }
                         });
+                    }
+                    else{
+                        binding.messJoinedCardView.setVisibility(View.GONE);
+                        binding.noMessCardView.setVisibility(View.VISIBLE);
                     }
                 }
 
