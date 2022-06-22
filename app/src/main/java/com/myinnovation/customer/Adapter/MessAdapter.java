@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,6 +40,8 @@ public class MessAdapter extends RecyclerView.Adapter<MessAdapter.VH> {
         Customer customer = customerList.get(position);
         holder.binding.MessName.setText(customer.getMess_name());
         holder.binding.Location.setText(customer.getMess_location());
+
+        holder.binding.ratingBar.setRating(Float.valueOf(customer.getRatings()));
 
         Picasso.get()
                 .load(customer.getImage())

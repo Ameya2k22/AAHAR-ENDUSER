@@ -70,6 +70,7 @@ public class RatingActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if(task.isSuccessful()){
+                                                    FirebaseDatabase.getInstance().getReference().child("Customer").child("Mess-Info").child(id).child("ratings").setValue(rating);
                                                     Toast.makeText(RatingActivity.this, "Rating Updated Successfully", Toast.LENGTH_SHORT).show();
                                                     Notification notification = new Notification();
                                                     notification.setNotificationType("Rating");

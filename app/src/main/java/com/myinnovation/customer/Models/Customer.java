@@ -4,6 +4,15 @@ public class Customer {
 
     private String image;
     private  String mess_email, mess_location, Phone_no, mess_name, monthlyPrice, owner_name, specialDishes, customer_id;
+    private String ratings;
+
+    public String getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(String ratings) {
+        this.ratings = ratings;
+    }
 
     public String getImage() {
         return image;
