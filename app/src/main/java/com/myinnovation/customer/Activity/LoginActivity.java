@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -19,9 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.myinnovation.customer.databinding.ActivityLoginBinding;
@@ -39,8 +36,6 @@ public class LoginActivity extends AppCompatActivity {
     String password;
     ProgressBar _progressBar;
 
-    private boolean showPass = false;
-
     ActivityLoginBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +43,9 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.toSignUpPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-                view.getContext().startActivity(intent);
-            }
+        binding.toSignUpPage.setOnClickListener(view -> {
+            Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+            view.getContext().startActivity(intent);
         });
 
         mAuth = FirebaseAuth.getInstance();
@@ -61,9 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
-        binding.loginBtn.setOnClickListener(view -> {
-                validateFieldsForLogin();
-        });
+        binding.loginBtn.setOnClickListener(view -> validateFieldsForLogin());
 
         binding.signInGoogleBtn.setOnClickListener(view -> SignInUsingGoogle());
 
@@ -72,17 +62,14 @@ public class LoginActivity extends AppCompatActivity {
             String Email = binding.loginEmail.getText().toString();
             String Password = binding.loginPassword.getText().toString();
 
-            FirebaseAuth.getInstance().signInWithEmailAndPassword(Email, Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(LoginActivity.this, "LoginActivity Successful", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                    }
-                    else{
-                        Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_SHORT).show();
-                    }
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(Email, Password).addOnCompleteListener(task -> {
+                if(task.isSuccessful()){
+                    Toast.makeText(LoginActivity.this, "LoginActivity Successful", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_SHORT).show();
                 }
             });
         });

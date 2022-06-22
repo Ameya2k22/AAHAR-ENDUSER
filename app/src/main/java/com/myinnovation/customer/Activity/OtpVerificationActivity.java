@@ -14,9 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
@@ -28,16 +26,16 @@ import com.myinnovation.customer.Models.User;
 import com.myinnovation.customer.R;
 import com.myinnovation.customer.databinding.ActivityOtpVerificationBinding;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class OtpVerificationActivity extends AppCompatActivity {
 
     ActivityOtpVerificationBinding binding;
     private String verificationID = "";
-    private String username = "", email = "", password = "", mobile = "", code = "";
+    private String username = "", email = "", password = "", mobile = "";
     private FirebaseAuth mAuth;
     private String userOTP = "", userImage;
-    private Uri userImageUri;
     private ProgressDialog dialog;
     private ProgressDialog pd;
 
@@ -203,7 +201,7 @@ public class OtpVerificationActivity extends AppCompatActivity {
         PhoneAuthProvider.verifyPhoneNumber(options);
     }
 
-    private PhoneAuthProvider.OnVerificationStateChangedCallbacks
+    private final PhoneAuthProvider.OnVerificationStateChangedCallbacks
             mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {
@@ -240,23 +238,20 @@ public class OtpVerificationActivity extends AppCompatActivity {
 
         pd = new ProgressDialog(this);
         pd.setTitle("Creating your account!!!");
-        pd.setProgressStyle(pd.STYLE_SPINNER);
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd.setMessage("Wait : ");
         pd.setCancelable(false);
         pd.setCanceledOnTouchOutside(false);
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener(new OnCompleteListener() {
-                    @Override
-                    public void onComplete(@NonNull Task task) {
-                        if (task.isSuccessful()) {
-                            saveUserImage();
-                            saveUserDetail();
-                            binding.bar.setVisibility(View.INVISIBLE);
-                            Toast.makeText(OtpVerificationActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(OtpVerificationActivity.this, MainActivity.class));
-                        }
+                .addOnCompleteListener((OnCompleteListener) task -> {
+                    if (task.isSuccessful()) {
+                        saveUserImage();
+                        saveUserDetail();
+                        binding.bar.setVisibility(View.INVISIBLE);
+                        Toast.makeText(OtpVerificationActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(OtpVerificationActivity.this, MainActivity.class));
                     }
                 })
                 .addOnFailureListener(e -> {
@@ -270,30 +265,27 @@ public class OtpVerificationActivity extends AppCompatActivity {
     private void saveUserDetail() {
         User user = new User(username, email, password, mobile, userImage);
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(getApplicationContext(), "Signed in", Toast.LENGTH_SHORT).show();
-                    String id = task.getResult().getUser().getUid();
-                    FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(id).setValue(user)
-                            .addOnCompleteListener(task1 -> {
-                                if(task1.isSuccessful()){
-                                    Toast.makeText(getApplicationContext(), "User Created", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "Unable to create account", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+                .addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        Toast.makeText(getApplicationContext(), "Signed in", Toast.LENGTH_SHORT).show();
+                        String id = Objects.requireNonNull(task.getResult().getUser()).getUid();
+                        FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(id).setValue(user)
+                                .addOnCompleteListener(task1 -> {
+                                    if(task1.isSuccessful()){
+                                        Toast.makeText(getApplicationContext(), "User Created", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "Unable to create account", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void saveUserImage() {
 
-        userImageUri = Uri.parse(userImage);
-        final StorageReference storageReference = storage.getReference().child("USER IMAGES").child(FirebaseAuth.getInstance().getUid());
+        Uri userImageUri = Uri.parse(userImage);
+        final StorageReference storageReference = storage.getReference().child("USER IMAGES").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()));
 
         storageReference.putFile(userImageUri)
                 .addOnSuccessListener(taskSnapshot -> {
@@ -303,7 +295,7 @@ public class OtpVerificationActivity extends AppCompatActivity {
                     Toast.makeText(this, "Image saved successfully.", Toast.LENGTH_LONG).show();
 
                     storageReference.getDownloadUrl()
-                            .addOnSuccessListener(uri1 -> mbase.getReference().child("Users").child(mAuth.getUid()).child("coverPhoto").setValue(uri1.toString()))
+                            .addOnSuccessListener(uri1 -> mbase.getReference().child("Users").child(Objects.requireNonNull(mAuth.getUid())).child("coverPhoto").setValue(uri1.toString()))
                             .addOnFailureListener(e -> Toast.makeText(this, "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show());
                 })
                 .addOnProgressListener(snapshot -> {

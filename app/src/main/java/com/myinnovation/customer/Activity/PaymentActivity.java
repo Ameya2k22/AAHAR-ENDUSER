@@ -11,13 +11,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 import com.myinnovation.customer.Models.Notification;
 import com.myinnovation.customer.R;
 import com.myinnovation.customer.databinding.ActivityPaymentBinding;
@@ -33,7 +29,8 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
     ActivityPaymentBinding binding;
     final int UPI_PAYMENT = 0;
     private int amount = 1;
-    private String upiId = "", name = "";
+    private String upiId = "";
+    private String name = "";
     private String Mess_Owner_Mobile_number = "";
     private String Mess_Owner_Email = "";
 
@@ -90,25 +87,23 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        switch (requestCode) {
-            case UPI_PAYMENT:
-                if ((RESULT_OK == resultCode) || (resultCode == 11)) {
-                    if (data != null) {
-                        String trxt = data.getStringExtra("response");
-                        ArrayList<String> dataList = new ArrayList<>();
-                        dataList.add(trxt);
-                        upiPaymentDataOperation(dataList);
-                    } else {
-                        ArrayList<String> dataList = new ArrayList<>();
-                        dataList.add("nothing");
-                        upiPaymentDataOperation(dataList);
-                    }
+        if (requestCode == UPI_PAYMENT) {
+            if ((RESULT_OK == resultCode) || (resultCode == 11)) {
+                if (data != null) {
+                    String trxt = data.getStringExtra("response");
+                    ArrayList<String> dataList = new ArrayList<>();
+                    dataList.add(trxt);
+                    upiPaymentDataOperation(dataList);
                 } else {
                     ArrayList<String> dataList = new ArrayList<>();
                     dataList.add("nothing");
                     upiPaymentDataOperation(dataList);
                 }
-                break;
+            } else {
+                ArrayList<String> dataList = new ArrayList<>();
+                dataList.add("nothing");
+                upiPaymentDataOperation(dataList);
+            }
         }
     }
 
@@ -119,19 +114,14 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             String paymentCancel = "";
             if(str == null) str = "discard";
             String status = "";
-            String approvalRefNo = "";
-            String response[] = str.split("&");
-            for (int i = 0; i < response.length; i++) {
-                String equalStr[] = response[i].split("=");
-                if(equalStr.length >= 2) {
-                    if (equalStr[0].toLowerCase().equals("Status".toLowerCase())) {
+            String[] response = str.split("&");
+            for (String s : response) {
+                String[] equalStr = s.split("=");
+                if (equalStr.length >= 2) {
+                    if (equalStr[0].equalsIgnoreCase("Status")) {
                         status = equalStr[1].toLowerCase();
                     }
-                    else if (equalStr[0].toLowerCase().equals("ApprovalRefNo".toLowerCase()) || equalStr[0].toLowerCase().equals("txnRef".toLowerCase())) {
-                        approvalRefNo = equalStr[1];
-                    }
-                }
-                else {
+                } else {
                     paymentCancel = "Payment cancelled by user.";
                 }
             }
@@ -166,11 +156,9 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivityManager != null) {
             NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
-            if (netInfo != null && netInfo.isConnected()
+            return netInfo != null && netInfo.isConnected()
                     && netInfo.isConnectedOrConnecting()
-                    && netInfo.isAvailable()) {
-                return true;
-            }
+                    && netInfo.isAvailable();
         }
         return false;
     }
@@ -178,10 +166,10 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
 
     private void makepayment()
     {
-//        if(amount == 0 || Mess_Owner_Mobile_number.isEmpty() || Mess_Owner_Email.isEmpty() || Mess_Owner_Email.equals("") || Mess_Owner_Mobile_number.equals("")){
-//            Toast.makeText(this, "Empty Fields", Toast.LENGTH_LONG).show();
-//            return;
-//        }
+        if(amount == 0 || Mess_Owner_Mobile_number.isEmpty() || Mess_Owner_Email.isEmpty() || Mess_Owner_Mobile_number.equals("")){
+            Toast.makeText(this, "Empty Fields", Toast.LENGTH_LONG).show();
+            return;
+        }
         Checkout checkout = new Checkout();
         checkout.setKeyID("rzp_test_YogxmByRqeM0xU");
 
@@ -198,8 +186,6 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             options.put("theme.color", "#3399cc");
             options.put("currency", "INR");
             options.put("amount", amount*100);//300 X 100
-//            options.put("prefill.email", Mess_Owner_Email);
-//            options.put("prefill.contact","+91" + Mess_Owner_Mobile_number);
 
             options.put("prefill.email", "maheshpimple2002@gmail.com");
             options.put("prefill.contact","+91" + "9653652759");
