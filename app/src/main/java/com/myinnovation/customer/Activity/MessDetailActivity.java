@@ -2,6 +2,7 @@ package com.myinnovation.customer.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,8 +49,8 @@ public class MessDetailActivity extends AppCompatActivity {
         database.getReference().child("Customer").child("Mess-Info").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snapshot1 : snapshot.getChildren()){
-                    if(Objects.equals(snapshot1.getKey(), key)){
+                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                    if (Objects.equals(snapshot1.getKey(), key)) {
                         Customer customer = snapshot1.getValue(Customer.class);
                         assert customer != null;
                         mess_email.setText(customer.getMess_email());
@@ -61,12 +62,22 @@ public class MessDetailActivity extends AppCompatActivity {
                         specialDishes.setText(customer.getSpecialDishes());
                     }
                 }
+            }
 
-                Join.setOnClickListener(view -> database.getReference().child("EndUser").child("Details").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        Join.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot12) {
-                        for(DataSnapshot snapshot1: snapshot12.getChildren()){
-                            if(Objects.equals(FirebaseAuth.getInstance().getUid(), snapshot1.getKey())){
+                    public void onDataChange(@NonNull DataSnapshot snapshot2) {
+                        for (DataSnapshot snapshot1 : snapshot2.getChildren()) {
+                            if (Objects.equals(FirebaseAuth.getInstance().getUid(), snapshot1.getKey())) {
                                 User user = snapshot1.getValue(User.class);
                                 assert user != null;
                                 user.setMess_id(key);
@@ -81,16 +92,7 @@ public class MessDetailActivity extends AppCompatActivity {
                                 Notification notification = new Notification();
                                 notification.setNotificationType("Joined");
                                 notification.setNotificationBy(FirebaseAuth.getInstance().getUid());
-
-<<<<<<< HEAD
-                                        FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(key).push().setValue(notification);
-                                    }
-                                }
-=======
-                                FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(key).setValue(notification).addOnCompleteListener(task -> {
-
-                                });
->>>>>>> origin
+                                FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(key).push().setValue(notification);
                             }
                         }
                     }
@@ -99,15 +101,9 @@ public class MessDetailActivity extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
-                }));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+                });
             }
         });
-
     }
 
     private void InitializeFields(){

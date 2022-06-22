@@ -152,12 +152,12 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(new Intent(this, MainActivity.class));
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if(mAuth.getCurrentUser() != null){
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
-        }
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        if(mAuth.getCurrentUser() != null){
+//            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//            startActivity(intent);
+//        }
+//    }
 }
