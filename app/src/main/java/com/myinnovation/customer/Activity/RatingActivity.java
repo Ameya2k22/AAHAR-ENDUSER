@@ -13,6 +13,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.myinnovation.customer.Models.Notification;
 import com.myinnovation.customer.databinding.ActivityRatingBinding;
 
 public class RatingActivity extends AppCompatActivity {
@@ -69,6 +70,16 @@ public class RatingActivity extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()){
                                                 Toast.makeText(RatingActivity.this, "Rating Updated Successfully", Toast.LENGTH_SHORT).show();
+                                                Notification notification = new Notification();
+                                                notification.setNotificationType("Rating");
+                                                notification.setNotificationBy(FirebaseAuth.getInstance().getUid());
+
+                                                FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(id).setValue(notification).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                    }
+                                                });
                                             }
                                         }
                                     });
@@ -110,10 +121,8 @@ public class RatingActivity extends AppCompatActivity {
         // else
 //        binding.ratingBar.setEnabled(false);
 //        binding.editRatingBtn.setEnabled(false);
-<<<<<<< HEAD
-=======
+
         binding.ratingBar.setEnabled(true);
         binding.editRatingBtn.setEnabled(true);
->>>>>>> origin
     }
 }

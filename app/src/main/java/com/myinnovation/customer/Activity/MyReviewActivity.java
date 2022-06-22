@@ -16,6 +16,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.myinnovation.customer.Models.Notification;
 import com.myinnovation.customer.Models.Reviews;
 import com.myinnovation.customer.R;
 import com.myinnovation.customer.databinding.ActivityMyReviewBinding;
@@ -82,6 +83,16 @@ public class MyReviewActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
                                     Toast.makeText(MyReviewActivity.this, "Review Added successfully", Toast.LENGTH_SHORT).show();
+                                    Notification notification = new Notification();
+                                    notification.setNotificationType("Review");
+                                    notification.setNotificationBy(FirebaseAuth.getInstance().getUid());
+
+                                    FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(id).setValue(notification).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                        }
+                                    });
                                 }
                             }
                         });

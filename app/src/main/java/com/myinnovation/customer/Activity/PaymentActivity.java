@@ -11,8 +11,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+import com.myinnovation.customer.Models.Notification;
 import com.myinnovation.customer.R;
 import com.myinnovation.customer.databinding.ActivityPaymentBinding;
 import com.razorpay.Checkout;
@@ -132,6 +138,10 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
 
             if (status.equals("success")) {
                 Toast.makeText(PaymentActivity.this, "Transaction successful.", Toast.LENGTH_SHORT).show();
+                Notification notification = new Notification();
+                notification.setNotificationType("Payment");
+                notification.setNotificationBy(FirebaseAuth.getInstance().getUid());
+
                 binding.amountEt.setText("");
                 binding.note.setText("");
             }

@@ -219,21 +219,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/userProfileImage" />
 
             <TextView
-<<<<<<< HEAD
                 android:id="@+id/attendanceDay2"
-=======
-                android:id="@+id/username"
->>>>>>> origin
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/oswald"
-<<<<<<< HEAD
-                android:text=""
                 android:textColor="@color/black"
-=======
-                android:text="Mahesh Pimpale"
-                android:textColor="@color/red"
->>>>>>> origin
+                android:text=""
                 android:textSize="28sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/view11"
@@ -241,10 +232,7 @@
                 app:layout_constraintTop_toTopOf="@+id/view11" />
 
             <TextView
-<<<<<<< HEAD
                 android:id="@+id/attendanceDate2"
-=======
-                android:id="@+id/attendanceDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="80dp"
@@ -258,11 +246,9 @@
 
             <TextView
                 android:id="@+id/attendanceDate"
->>>>>>> origin
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/oswald"
-<<<<<<< HEAD
                 android:text=""
                 android:textColor="@color/black"
                 android:textSize="28sp"
@@ -286,15 +272,12 @@
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="@+id/view11"
                 app:layout_constraintTop_toBottomOf="@+id/attendanceDate2" />
-=======
-                android:text="19/06/2022"
-                android:textColor="@color/white"
-                android:textSize="28sp"
-                app:layout_constraintEnd_toEndOf="@+id/attendanceDay"
-                app:layout_constraintStart_toStartOf="@+id/attendanceDay"
-                app:layout_constraintTop_toBottomOf="@+id/attendanceDay" />
-
->>>>>>> origin
+            android:text="19/06/2022"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="@+id/attendanceDay"
+            app:layout_constraintStart_toStartOf="@+id/attendanceDay"
+            app:layout_constraintTop_toBottomOf="@+id/attendanceDay" />
 
             <TextView
                 android:id="@+id/days_remaining"

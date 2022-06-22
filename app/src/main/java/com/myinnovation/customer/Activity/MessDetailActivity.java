@@ -5,16 +5,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.myinnovation.customer.Models.Customer;
+import com.myinnovation.customer.Models.Notification;
 import com.myinnovation.customer.Models.StudentInfo;
 import com.myinnovation.customer.Models.User;
 import com.myinnovation.customer.R;
@@ -78,6 +82,17 @@ public class MessDetailActivity extends AppCompatActivity {
                                         database.getReference().child("Customer").child("Students").child(key).push().setValue(studentInfo);
                                         String rating = "0";
                                         database.getReference().child("Customer").child("Ratings").child(key).setValue(rating);
+                                        Toast.makeText(MessDetailActivity.this, "Joined", Toast.LENGTH_SHORT).show();
+                                        Notification notification = new Notification();
+                                        notification.setNotificationType("Joined");
+                                        notification.setNotificationBy(FirebaseAuth.getInstance().getUid());
+
+                                        FirebaseDatabase.getInstance().getReference("Customer").child("Notification").child(key).setValue(notification).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
                                     }
                                 }
                             }
