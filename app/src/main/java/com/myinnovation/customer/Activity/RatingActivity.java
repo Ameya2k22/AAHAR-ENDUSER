@@ -119,13 +119,8 @@ public class RatingActivity extends AppCompatActivity {
         binding.ratingBar.setEnabled(true);
         binding.editRatingBtn.setEnabled(true);
         // else
-<<<<<<< HEAD
 //        binding.ratingBar.setEnabled(false);
 //        binding.editRatingBtn.setEnabled(false);
 
-        binding.ratingBar.setEnabled(true);
-        binding.editRatingBtn.setEnabled(true);
-=======
->>>>>>> origin
     }
 }

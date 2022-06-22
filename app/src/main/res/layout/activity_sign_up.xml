@@ -11,7 +11,7 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="160dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,22 +22,23 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
             android:layout_gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="20dp"
             android:gravity="center"
             android:text="@string/welcome_user"
             android:textColor="@color/dark_orange"
             android:textSize="32sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="TextContrastCheck" />
 
     </LinearLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/userImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -74,7 +75,8 @@
             android:inputType="text"
             android:minHeight="48dp"
             android:textColor="@color/black"
-           />
+            tools:ignore="TextContrastCheck"
+            tools:targetApi="lollipop" />
 
         <EditText
             android:id="@+id/reg_email"
@@ -92,7 +94,8 @@
             android:inputType="textEmailAddress"
             android:minHeight="48dp"
             android:textColor="@color/black"
-            />
+            tools:targetApi="lollipop"
+            android:importantForAutofill="no" />
 
 
         <EditText
@@ -103,15 +106,17 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/text_box"
+            android:backgroundTint="@color/white"
             android:drawableStart="@drawable/ic_call"
             android:drawablePadding="8dp"
             android:fontFamily="sans-serif"
             android:hint="@string/mobile"
-            android:backgroundTint="@color/white"
             android:inputType="number"
             android:minHeight="48dp"
             android:textColor="@color/black"
-            />
+            tools:ignore="TextContrastCheck"
+            tools:targetApi="lollipop"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/reg_password"
@@ -130,7 +135,9 @@
             android:inputType="textPassword"
             android:minHeight="48dp"
             android:textColor="@color/black"
-       />
+            tools:ignore="TextContrastCheck"
+            tools:targetApi="lollipop"
+            android:importantForAutofill="no" />
 
         <Button
             android:id="@+id/reg_submit"
@@ -142,7 +149,7 @@
             android:fontFamily="sans-serif"
             android:text="@string/sign_up"
             android:textColor="@color/white"
-          />
+            tools:ignore="TextContrastCheck" />
 
 
     </LinearLayout>
