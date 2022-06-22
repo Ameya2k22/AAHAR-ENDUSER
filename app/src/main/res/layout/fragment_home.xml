@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
         android:fontFamily="@font/oswald"
-        android:text="Aster Mess"
+        android:text=""
         android:textColor="@color/white"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,10 +36,12 @@
         android:layout_height="120dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="88dp"
+        android:contentDescription="mess logo"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/aahar_logo" />
+        app:srcCompat="@drawable/aahar_logo"
+        tools:ignore="ImageContrastCheck" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/linearLayoutCompat"
@@ -54,6 +56,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="4dp"
             android:orientation="horizontal">
 
             <TextView
@@ -61,9 +64,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:fontFamily="@font/oswald"
-                android:text="Mess Owner :"
+                android:text="@string/mess_owner"
                 android:textColor="@color/dark_orange"
                 android:textSize="20sp" />
 
@@ -72,9 +74,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
                 android:fontFamily="@font/oswald"
-                android:text="ABC XYZ"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
@@ -83,6 +84,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="4dp"
             android:orientation="horizontal">
 
             <TextView
@@ -93,7 +95,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/oswald"
-                android:text="Address : "
+                android:text="@string/address"
                 android:textColor="@color/dark_orange"
                 android:textSize="20sp" />
 
@@ -106,7 +108,7 @@
                 android:gravity="start"
                 android:inputType="textMultiLine"
                 android:minHeight="48dp"
-                android:text="Walchand College of Engineering, Vishrambagh, Sangli, 416262"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="20sp" />
         </LinearLayout>
@@ -114,6 +116,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="4dp"
             android:orientation="horizontal">
 
             <TextView
@@ -124,7 +127,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/oswald"
-                android:text="Mobile : "
+                android:text="@string/mess_mobile"
                 android:textColor="@color/dark_orange"
                 android:textSize="20sp" />
 
@@ -138,7 +141,7 @@
                 android:gravity="center"
                 android:inputType="textMultiLine"
                 android:minHeight="48dp"
-                android:text="9054687412"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
@@ -147,6 +150,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="4dp"
             android:orientation="horizontal">
 
             <TextView
@@ -157,7 +161,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_gravity="bottom"
                 android:fontFamily="@font/oswald"
-                android:text="Email : "
+                android:text="@string/mess_email"
                 android:textColor="@color/dark_orange"
                 android:textSize="20sp" />
 
@@ -171,7 +175,7 @@
                 android:gravity="center"
                 android:inputType="textMultiLine"
                 android:minHeight="48dp"
-                android:text="abc@gmail.com"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
@@ -201,11 +205,13 @@
         android:background="@drawable/circle"
         android:backgroundTint="@color/light_orange"
         android:padding="8dp"
-        android:text="Pay"
+        android:text="@string/pay"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck,TextContrastCheck"
+        tools:targetApi="lollipop" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -222,7 +228,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="22dp"
             android:layout_marginEnd="32dp"
             android:orientation="horizontal">
 
@@ -230,11 +236,8 @@
                 android:id="@+id/textView18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:drawablePadding="16dp"
                 android:fontFamily="@font/oswald"
-                android:padding="8dp"
-                android:text="@string/price_per_month"
+                android:text="@string/price_month"
                 android:textColor="@color/dark_orange"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -245,55 +248,29 @@
             <TextView
                 android:id="@+id/monthlyPrice"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:layout_gravity="start"
-                android:paddingLeft="20dp"
                 android:gravity="center"
-                android:text="2500 Rs."
+                android:text=""
                 android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="start"
+                android:layout_marginStart="4dp"
+                android:text="@string/rs"
+                android:gravity="start"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
         </LinearLayout>
 
-        <!--        <TextView-->
-        <!--            android:id="@+id/textView18"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_weight="1"-->
-        <!--            android:drawableStart="@drawable/ic_restaurant_menu"-->
-        <!--            android:drawablePadding="16dp"-->
-        <!--            android:drawableTint="@color/light_orange"-->
-        <!--            android:fontFamily="@font/oswald"-->
-        <!--            android:gravity="center"-->
-        <!--            android:padding="8dp"-->
-        <!--            android:text="Menu Book"-->
-        <!--            android:textColor="@color/green"-->
-        <!--            android:textSize="20sp"-->
-        <!--            android:textStyle="bold"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintHorizontal_bias="0.5"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/view3" />-->
-
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/textView22"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_weight="1"-->
-        <!--            android:drawableStart="@drawable/ic_restaurant_menu"-->
-        <!--            android:drawablePadding="16dp"-->
-        <!--            android:drawableTint="@color/blue"-->
-        <!--            android:fontFamily="@font/oswald"-->
-        <!--            android:gravity="center"-->
-        <!--            android:padding="8dp"-->
-        <!--            android:text="My Attendance"-->
-        <!--            android:textColor="@color/green"-->
-        <!--            android:textSize="20sp"-->
-        <!--            android:textStyle="bold"-->
-        <!--            app:layout_constraintEnd_toEndOf="@+id/textView18"-->
-        <!--            app:layout_constraintStart_toStartOf="@+id/textView18"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/textView18" />-->
 
         <TextView
             android:id="@+id/specialDishes"
@@ -307,10 +284,9 @@
             android:fontFamily="@font/oswald"
             android:gravity="center"
             android:padding="8dp"
-            android:text="special dishes -> click here"
+            android:text="@string/special_dishes"
             android:textColor="@color/dark_yellow"
             android:textSize="20sp"
-
             app:drawableStartCompat="@drawable/ic_restaurant_menu"
             app:drawableTint="@color/blue"
             app:layout_constraintEnd_toEndOf="parent"
@@ -329,7 +305,7 @@
             android:fontFamily="@font/oswald"
             android:gravity="center"
             android:padding="8dp"
-            android:text="complaints and reviews -> click here"
+            android:text="@string/complaints_and_reviews_click_here"
             android:textColor="@color/dark_yellow"
             android:textSize="20sp"
             app:drawableStartCompat="@drawable/ic_warning"
@@ -352,7 +328,7 @@
             android:fontFamily="@font/oswald"
             android:gravity="center"
             android:padding="8dp"
-            android:text="ratings -> click here"
+            android:text="@string/ratings_click_here"
             android:textColor="@color/dark_yellow"
             android:textSize="20sp"
 
@@ -386,18 +362,5 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/light_orange"
-        android:clickable="true"
-        android:src="@drawable/ic_add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.962" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
