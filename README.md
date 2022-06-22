@@ -16,11 +16,12 @@ In Login Activity, we have implemented login with email and password as well as 
 MainActivity.
 After authentication, the user can enter the main activity. So we have implemented a navigation drawer and fragments for easy rendering in our app.
 The main activity mainly consists of 5 fragments; they are: home fragment, explore fragment, attendance fragment, calendar fragment, and notification fragment.
- 
+![alt text](https://github.com/Ameya2k22/Images/blob/main/MainActivity.jpeg)
 
 1) Home Fragment:
 In the case of an end user, the home fragment appears for the first time when adding a new mess. There is an option to add a mess for the first time. After successfully entering into any mess, the add option will disappear and all the details of the mess that user joined will start to appear there.Mess information includes: mess name, mess owner name, mess address, mess mobile number and email, mess reviews and complaints, and mess rating, which will appear on the home fragment.
 The Home fragment also provides a way to pay via a button from which a new Payment Activity opens from which the user can pay mess fees. (The user will be unable to attend sessions in the attendance fragment until the fee is successfully paid.)
+![alt text](https://github.com/Ameya2k22/Images/blob/main/user_ticket.jpeg)
    
 1)Activity Mess Details:
   From Mess Detail Activity also provides a way to control mess owners through reviews and ratings of mess.
@@ -28,7 +29,7 @@ The Home fragment also provides a way to pay via a button from which a new Payme
   
 2) Payment Activity:
   Payment activity provides two ways for payment to users. One is the Razor pay (only available in test mode) option, from which users can use UPI, NetBanking, and Card Payment, while the other is Direct UPI payment (this option checks whether the user has any UPI payment app already or not).
-
+![alt text](https://github.com/Ameya2k22/Images/blob/main/Payment%20Gateway.jpeg)
 
 3)Reviews Activity:
   By clicking on the button Reviews and complaints, the user will be navigated to the Reviews activity where he/she can see reviews of all other users. Also, there is an option for giving their own reviews. They can also edit their previous reviews about the mess.
@@ -46,13 +47,16 @@ Explore Fragment will show all registered messes in recyclerview with their mino
  
 3. Attendance Fragment:
 The Attendance fragment is useful for the Mess Owner to count, check, and authenticate users. When the mess owner initiates an attendance session from its app attendance cardview with the day, date, and time, and the user clicks on the Yes button, the count increases automatically and the student receives a ticket for entering the mess.
+![Alt text](https://github.com/Ameya2k22/Images/blob/main/Attendance%20Activity.jpeg)
+
 
 
 
 
 4. Calendar Fragment:
 It is now important to track a user's attendance so that they can pay when they arrive and eat in the mess. It shows a green coloured date when the user was present to eat in that particular mess and shows red if he/she was absent for that day. In addition, the total days count in a given month is displayed to the user so that he can keep track of how many days remain to repay the mess fees and continue membership.
-
+![alt text](https://github.com/Ameya2k22/Images/blob/main/Calendar.jpeg)
+![alt text](https://github.com/Ameya2k22/Images/blob/main/Calendar_present.jpeg)
 
 
 
