@@ -93,12 +93,9 @@ public class MyReviewActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
 
-<<<<<<< HEAD
                                     }
                                 });
                             }
-=======
->>>>>>> origin
                         });
                     }
 
