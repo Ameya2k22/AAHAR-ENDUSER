@@ -211,4 +211,8 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         binding.paymentSuccessfulLinearLayout.setVisibility(View.GONE);
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, MainActivity.class));
+    }
 }
