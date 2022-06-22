@@ -5,7 +5,7 @@ public class MessInfo {
     private String owner_name, mess_name, mess_email, mess_location, monthlyPrice, specialDishes, phone_no;
     private String mess_image;
     private String mess_upi_id;
-    private long ratings;
+    private String ratings;
 
     public String getMess_image() {
         return mess_image;
@@ -39,17 +39,9 @@ public class MessInfo {
         this.mess_location = mess_location;
         this.monthlyPrice = monthlyPrice;
         this.specialDishes = specialDishes;
-        this.ratings = 0;
         this.phone_no = phone_no;
     }
 
-    public long getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(long ratings) {
-        this.ratings = ratings;
-    }
 
     public String getOwner_name() {
         return owner_name;

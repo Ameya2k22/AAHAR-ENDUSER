@@ -76,7 +76,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                                                 MessInfo messInfo = snapshot2.getValue(MessInfo.class);
                                                 binding.paymentId.setText(messInfo.getMess_upi_id());
                                                 binding.name.setText(messInfo.getMess_name());
-                                                payUsingUpi(amount, binding.paymentId.getText().toString(), binding.name.getText().toString(), note);
+                                                payUsingUpi(Long.parseLong(amount), binding.paymentId.getText().toString(), binding.name.getText().toString(), note);
 
                                             }
                                         }
@@ -100,13 +100,13 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         });
     }
 
-    void payUsingUpi(String amount, String upiId, String name, String note) {
+    void payUsingUpi(long amount, String upiId, String name, String note) {
 
         Uri uri = Uri.parse("upi://pay").buildUpon()
                 .appendQueryParameter("pa", upiId)
                 .appendQueryParameter("pn", name)
                 .appendQueryParameter("tn", note)
-                .appendQueryParameter("am", amount)
+                .appendQueryParameter("am", String.valueOf(amount))
                 .appendQueryParameter("cu", "INR")
                 .build();
 

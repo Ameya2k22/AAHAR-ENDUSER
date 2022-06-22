@@ -118,4 +118,25 @@ public class MessDetailActivity extends AppCompatActivity {
         mess_mobile = findViewById(R.id.mess_mobile);
         Join = findViewById(R.id.Join);
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseDatabase.getInstance().getReference().child("EndUser").child("Details").child(FirebaseAuth.getInstance().getUid()).child("mess_id").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    binding.Join.setEnabled(false);
+                }
+                else{
+                    binding.Join.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 }
