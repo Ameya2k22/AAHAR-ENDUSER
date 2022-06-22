@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -34,7 +33,6 @@ public class LoginActivity extends AppCompatActivity {
 
     String email;
     String password;
-    ProgressBar _progressBar;
 
     ActivityLoginBinding binding;
     @Override
@@ -59,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         binding.loginBtn.setOnClickListener(view -> {
+            binding.progressBar3.setVisibility(View.VISIBLE);
             String Email = binding.loginEmail.getText().toString();
             String Password = binding.loginPassword.getText().toString();
 
@@ -67,16 +66,18 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "LoginActivity Successful", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
+                    binding.progressBar3.setVisibility(View.INVISIBLE);
                 }
                 else{
                     Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                    binding.progressBar3.setVisibility(View.INVISIBLE);
                 }
             });
         });
     }
 
     private void SignInUsingGoogle() {
-        _progressBar.setVisibility(View.VISIBLE);
+        binding.progressBar3.setVisibility(View.VISIBLE);
         Intent signInIntent = googleSignInClient.getSignInIntent();
         someActivityResultLauncher.launch(signInIntent);
     }
@@ -93,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                         task.getResult(ApiException.class);
                         NavigationToNextActivity();
                     } catch (ApiException e){
-                        _progressBar.setVisibility(View.INVISIBLE);
+                        binding.progressBar3.setVisibility(View.VISIBLE);
                         Toast.makeText(LoginActivity.this, "Something went wrong" + e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
@@ -123,31 +124,31 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void LoginUsingEmailPassword() {
-        _progressBar.setVisibility(View.VISIBLE);
+        binding.progressBar3.setVisibility(View.VISIBLE);
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener(authResult -> {
                     if (Objects.requireNonNull(mAuth.getCurrentUser()).isEmailVerified()) {
                         binding.loginEmail.setText("");
                         binding.loginPassword.setText("");
-                        _progressBar.setVisibility(View.INVISIBLE);
+                        binding.progressBar3.setVisibility(View.VISIBLE);
                         NavigationToNextActivity();
                     } else {
                         binding.loginEmail.setText("");
                         binding.loginPassword.setText("");
-                        _progressBar.setVisibility(View.INVISIBLE);
+                        binding.progressBar3.setVisibility(View.VISIBLE);
                         Toast.makeText(LoginActivity.this, "Email is not verified yet please verify...", Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(e -> {
                     binding.loginEmail.setText("");
                     binding.loginPassword.setText("");
-                    _progressBar.setVisibility(View.INVISIBLE);
+                    binding.progressBar3.setVisibility(View.VISIBLE);
                     Toast.makeText(LoginActivity.this, "Login Failed try again...", Toast.LENGTH_LONG).show();
                 });
     }
 
     private void    NavigationToNextActivity(){
-        _progressBar.setVisibility(View.INVISIBLE);
+        binding.progressBar3.setVisibility(View.VISIBLE);
         finish();
         startActivity(new Intent(this, MainActivity.class));
     }

@@ -1,9 +1,12 @@
 package com.myinnovation.customer.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
@@ -14,6 +17,8 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 import com.myinnovation.customer.R;
 import com.myinnovation.customer.databinding.ActivityMainBinding;
+
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,6 +58,14 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.action_settings){
+            startActivity(new Intent(this, SettingActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

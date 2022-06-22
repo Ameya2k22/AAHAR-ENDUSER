@@ -61,17 +61,17 @@
             android:layout_marginStart="32sp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="32sp"
+            android:autofillHints="login email"
             android:background="@drawable/text_box"
             android:backgroundTint="@color/white"
             android:drawableStart="@drawable/ic_email"
             android:drawablePadding="8dp"
-            android:inputType="textEmailAddress"
             android:fontFamily="sans-serif"
             android:hint="@string/email"
-            android:autofillHints="login email"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
             android:minHeight="48dp"
             android:textColor="@color/black"
-            android:importantForAutofill="no"
             tools:targetApi="lollipop" />
 
 
@@ -82,6 +82,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="32dp"
+            android:autofillHints="login password"
             android:background="@drawable/text_box"
             android:backgroundTint="@color/white"
             android:drawableStart="@drawable/ic_lock"
@@ -90,7 +91,6 @@
             android:hint="@string/password"
             android:inputType="textPassword"
             android:minHeight="48dp"
-            android:autofillHints="login password"
             android:textColor="@color/black"
             tools:ignore="TextContrastCheck"
             tools:targetApi="lollipop" />
@@ -102,10 +102,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:background="@android:color/transparent"
             android:gravity="center"
             android:padding="4dp"
-            android:layout_marginEnd="16dp"
             android:text="@string/forgot_password"
             android:textColor="@color/white"
             android:textSize="12sp"
@@ -165,6 +165,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar3"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

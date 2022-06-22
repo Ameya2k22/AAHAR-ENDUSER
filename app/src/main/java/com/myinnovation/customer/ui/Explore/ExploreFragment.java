@@ -26,7 +26,6 @@ import java.util.ArrayList;
 
 public class ExploreFragment extends Fragment {
 
-    RecyclerView recyclerView;
     MessAdapter messAdapter;
     ArrayList<Customer> customers;
     FirebaseAuth auth;
@@ -45,43 +44,48 @@ public class ExploreFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        com.myinnovation.customer.databinding.FragmentExploreBinding binding = FragmentExploreBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
-
+        FragmentExploreBinding binding = FragmentExploreBinding.inflate(inflater, container, false);
+        FirebaseThread thread = new FirebaseThread();
+        thread.start();
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
 
-        recyclerView = view.findViewById(R.id.recyclerView);
         customers = new ArrayList<>();
 
         messAdapter = new MessAdapter(customers, getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setNestedScrollingEnabled(true);
-        recyclerView.setAdapter(messAdapter);
+        binding.recyclerView.setLayoutManager(linearLayoutManager);
+        binding.recyclerView.setNestedScrollingEnabled(true);
+        binding.recyclerView.setAdapter(messAdapter);
 
-        database.getReference().child("Customer").child("Mess-Info").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                        Customer customerInfo = snapshot1.getValue(Customer.class);
-                        assert customerInfo != null;
-                        customerInfo.setCustomer_id(snapshot1.getKey());
-                        customers.add(customerInfo);
+        return binding.getRoot();
+
+
+    }
+
+    private class FirebaseThread extends Thread{
+        @Override
+        public void run() {
+            FirebaseDatabase.getInstance().getReference().child("Customer").child("Mess-Info").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()){
+                        for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                            Customer customerInfo = snapshot1.getValue(Customer.class);
+                            assert customerInfo != null;
+                            customerInfo.setCustomer_id(snapshot1.getKey());
+                            customers.add(customerInfo);
+                        }
+                        messAdapter.notifyDataSetChanged();
                     }
-                    messAdapter.notifyDataSetChanged();
+
                 }
 
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        return view;
-
-
+                }
+            });
+        }
     }
 }

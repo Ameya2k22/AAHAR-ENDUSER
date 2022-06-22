@@ -58,9 +58,6 @@ public class MessAdapter extends RecyclerView.Adapter<MessAdapter.VH> {
         return customerList.size();
     }
 
-    public interface RecyclerViewClickListner{
-        void onClick(View v, int position);
-    }
 
     public static class VH extends RecyclerView.ViewHolder{
         SingleMessLayoutBinding binding;

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,24 +46,26 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         FirebaseDatabase.getInstance().getReference().child("Customer").child("Notification").child(notification.getNotificationType()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user = snapshot.getValue(User.class);
-                switch (type) {
-                    case "Joined":
-                        assert user != null;
-                        holder.notification.setText(new StringBuilder().append(user.getName()).append(" joined the mess").toString());
-                        break;
-                    case "Review":
-                        assert user != null;
-                        holder.notification.setText(new StringBuilder().append(user.getName()).append(" reviewed the mess").toString());
-                        break;
-                    case "Rating":
-                        assert user != null;
-                        holder.notification.setText(new StringBuilder().append(user.getName()).append(" gives rating to the mess").toString());
-                        break;
-                    case "Payment":
-                        assert user != null;
-                        holder.notification.setText(new StringBuilder().append(user.getName()).append(" has done the payment").toString());
-                        break;
+                if(snapshot.exists()){
+                    User user = snapshot.getValue(User.class);
+                    switch (type) {
+                        case "Joined":
+                            assert user != null;
+                            holder.notification.setText(new StringBuilder().append(user.getName()).append(" joined the mess").toString());
+                            break;
+                        case "Review":
+                            assert user != null;
+                            holder.notification.setText(new StringBuilder().append(user.getName()).append(" reviewed the mess").toString());
+                            break;
+                        case "Rating":
+                            assert user != null;
+                            holder.notification.setText(new StringBuilder().append(user.getName()).append(" gives rating to the mess").toString());
+                            break;
+                        case "Payment":
+                            assert user != null;
+                            holder.notification.setText(new StringBuilder().append(user.getName()).append(" has done the payment").toString());
+                            break;
+                    }
                 }
 
             }
