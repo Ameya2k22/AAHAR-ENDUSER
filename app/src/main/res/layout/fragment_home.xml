@@ -399,6 +399,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.962" />
-    >>>>>>> d50f58546b245042bcc18f69acb7a495ed0a83e0
 
 </androidx.constraintlayout.widget.ConstraintLayout>
