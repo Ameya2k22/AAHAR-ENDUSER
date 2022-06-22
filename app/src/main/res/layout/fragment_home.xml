@@ -20,14 +20,13 @@
         android:id="@+id/mess_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="120dp"
         android:fontFamily="@font/oswald"
         android:text="Aster Mess"
         android:textColor="@color/white"
         android:textSize="28sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.337"
+        app:layout_constraintHorizontal_bias="0.607"
         app:layout_constraintStart_toEndOf="@+id/imageView6"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,13 +45,11 @@
         android:id="@+id/linearLayoutCompat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:orientation="vertical"
         android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view3">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,8 +65,7 @@
                 android:fontFamily="@font/oswald"
                 android:text="Mess Owner :"
                 android:textColor="@color/dark_orange"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/owner_name"
@@ -79,7 +75,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/oswald"
                 android:text="ABC XYZ"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -93,11 +89,12 @@
                 android:id="@+id/textView14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="top"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/oswald"
-                android:text="ADDRESS : "
-                android:textColor="@color/green"
+                android:text="Address : "
+                android:textColor="@color/dark_orange"
                 android:textSize="20sp" />
 
             <TextView
@@ -106,12 +103,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:fontFamily="@font/oswald"
-                android:gravity="center"
+                android:gravity="le'"
                 android:inputType="textMultiLine"
                 android:minHeight="48dp"
-                android:text="Walchand College of Engineering, Vishrambaug, Sangli, 416262"
-                android:textColor="@color/grey"
-                android:textStyle="bold" />
+                android:text="Walchand College of Engineering, Vishrambagh, Sangli, 416262"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -123,13 +120,13 @@
                 android:id="@+id/textView20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/oswald"
                 android:text="Mobile : "
-                android:textColor="@color/green"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textColor="@color/dark_orange"
+                android:textSize="20sp" />
 
 
             <TextView
@@ -142,9 +139,8 @@
                 android:inputType="textMultiLine"
                 android:minHeight="48dp"
                 android:text="9054687412"
-                android:textColor="@color/grey"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -159,11 +155,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_gravity="bottom"
                 android:fontFamily="@font/oswald"
                 android:text="Email : "
-                android:textColor="@color/green"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textColor="@color/dark_orange"
+                android:textSize="20sp" />
 
 
             <TextView
@@ -176,9 +172,8 @@
                 android:inputType="textMultiLine"
                 android:minHeight="48dp"
                 android:text="abc@gmail.com"
-                android:textColor="@color/grey"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
 
         </LinearLayout>
@@ -191,7 +186,6 @@
         android:layout_height="2dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -205,10 +199,10 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/circle"
-        android:backgroundTint="@color/green"
+        android:backgroundTint="@color/light_orange"
         android:padding="8dp"
         android:text="Pay"
-        android:textColor="@color/light_orange"
+        android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -220,10 +214,10 @@
         android:gravity="center"
         android:orientation="vertical"
         android:weightSum="5"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -234,16 +228,15 @@
 
             <TextView
                 android:id="@+id/textView18"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+
                 android:drawablePadding="16dp"
                 android:fontFamily="@font/oswald"
                 android:padding="8dp"
                 android:text="@string/price_per_month"
-                android:textColor="@color/green"
+                android:textColor="@color/dark_orange"
                 android:textSize="20sp"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -254,10 +247,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
-                android:layout_weight="1"
+                android:paddingLeft="20dp"
                 android:gravity="center"
                 android:text="2500 Rs."
-                android:textColor="@color/light_orange"
+                android:textColor="@color/white"
                 android:textSize="24sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -314,10 +307,10 @@
             android:fontFamily="@font/oswald"
             android:gravity="center"
             android:padding="8dp"
-            android:text="specialDishes"
-            android:textColor="@color/green"
+            android:text="special dishes -> click here"
+            android:textColor="@color/dark_yellow"
             android:textSize="20sp"
-            android:textStyle="bold"
+
             app:drawableStartCompat="@drawable/ic_restaurant_menu"
             app:drawableTint="@color/blue"
             app:layout_constraintEnd_toEndOf="parent"
@@ -336,10 +329,9 @@
             android:fontFamily="@font/oswald"
             android:gravity="center"
             android:padding="8dp"
-            android:text="complaints_and_reviews"
-            android:textColor="@color/green"
+            android:text="complaints and reviews -> click here"
+            android:textColor="@color/dark_yellow"
             android:textSize="20sp"
-            android:textStyle="bold"
             app:drawableStartCompat="@drawable/ic_warning"
             app:drawableTint="@color/red"
             app:layout_constraintBottom_toTopOf="@+id/button"
@@ -360,10 +352,10 @@
             android:fontFamily="@font/oswald"
             android:gravity="center"
             android:padding="8dp"
-            android:text="@string/ratings"
-            android:textColor="@color/green"
+            android:text="ratings -> click here"
+            android:textColor="@color/dark_yellow"
             android:textSize="20sp"
-            android:textStyle="bold"
+
             app:drawableStartCompat="@android:drawable/star_big_off"
             app:drawableTint="@color/dark_yellow"
             app:layout_constraintEnd_toEndOf="@+id/textView8"

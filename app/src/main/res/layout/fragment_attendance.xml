@@ -272,12 +272,21 @@
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="@+id/view11"
                 app:layout_constraintTop_toBottomOf="@+id/attendanceDate2" />
+<<<<<<< HEAD
             android:text="19/06/2022"
             android:textColor="@color/white"
             android:textSize="28sp"
             app:layout_constraintEnd_toEndOf="@+id/attendanceDay"
             app:layout_constraintStart_toStartOf="@+id/attendanceDay"
             app:layout_constraintTop_toBottomOf="@+id/attendanceDay" />
+=======
+                android:text="19/06/2022"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                app:layout_constraintEnd_toEndOf="@+id/attendanceDay"
+                app:layout_constraintStart_toStartOf="@+id/attendanceDay"
+                app:layout_constraintTop_toBottomOf="@+id/attendanceDay" />
+>>>>>>> origin
 
             <TextView
                 android:id="@+id/days_remaining"

@@ -7,7 +7,10 @@
     android:background="@drawable/ic_head_inv_2_bg"
     tools:context=".Activity.RatingActivity">
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin
     <TextView
         android:id="@+id/attendanceDay"
         android:layout_width="wrap_content"
